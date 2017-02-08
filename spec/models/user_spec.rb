@@ -13,4 +13,11 @@ RSpec.describe User, type: :model do
   it "is invalid without lastname" do
     FactoryGirl.build(:user, lastname: nil).should_not be_valid
   end
+  it "doesn't allow repeated email" do
+    user = FactoryGirl.create(:user)
+    FactoryGirl.build(:user, email: user.email).should_not be_valid
+  end
+  it "has secure password" do
+    FactoryGirl.build(:user, password: "12345678", password_confirmation: "12345679").should_not be_valid
+  end
 end
