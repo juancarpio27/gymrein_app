@@ -9,6 +9,13 @@ Rails.application.routes.draw do
 
         resource :users, only: [:create]
 
+        resource :sessions, only: [:destroy] do
+          collection {
+            post 'plain'
+          }
+        end
+
+
       end
     end
   end

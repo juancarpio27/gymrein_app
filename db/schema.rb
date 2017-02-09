@@ -10,7 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170208013214) do
+ActiveRecord::Schema.define(version: 20170209005356) do
+
+  create_table "api_keys", force: :cascade do |t|
+    t.string   "access_token", limit: 64
+    t.integer  "user_id",                 null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["user_id"], name: "index_api_keys_on_user_id"
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.integer  "platform",   limit: 1, null: false
+    t.datetime "deleted_at"
+    t.integer  "user_id",              null: false
+    t.integer  "api_key_id",           null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.index ["api_key_id"], name: "index_sessions_on_api_key_id"
+    t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                             default: "", null: false

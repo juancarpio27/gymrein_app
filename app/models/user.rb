@@ -4,6 +4,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-  validates :name, presence: true
-  validates :lastname, presence: true
+  validates :name, presence: true, length: {in: 2..75}
+  validates :lastname, presence: true, length: {in: 2..90}
+
+  has_many :api_keys
+  has_many :sessions
+
+  def access_token
+    api_keys.first.nil? ? nil : api_keys.last.access_token
+  end
+
 end
