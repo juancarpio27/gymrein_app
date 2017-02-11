@@ -15,6 +15,6 @@ class CreateCards < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
-    add_foreign_key :sessions, :users
+    add_foreign_key :cards, :users
   end
 end
