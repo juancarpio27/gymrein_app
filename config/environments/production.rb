@@ -89,13 +89,13 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default :charset => "utf-8"
-  config.action_mailer.default_url_options = { :host => 'http://gymrein.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'gymrein.herokuapp.com' }
 
   config.action_mailer.smtp_settings = {
       :user_name => "juan.carpio01@gmail.com",
       :password =>"21290569",
       :address => 'smtp.gmail.com',
-      :domain => 'gmail.com',
+      :domain => 'gymrein.herokuapp.com',
       :port => 587,
       :authentication => :login,
       :enable_starttls_auto => true
