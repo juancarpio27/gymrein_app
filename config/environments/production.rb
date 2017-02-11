@@ -92,8 +92,8 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { :host => 'gymrein.herokuapp.com' }
 
   config.action_mailer.smtp_settings = {
-      :user_name => "gymrein.itesm@gmail.com",
-      :password =>"mayo2017",
+      :user_name => ENV["EMAIL"],
+      :password => ENV["PASSWORD"],
       :address => 'smtp.gmail.com',
       :domain => 'gymrein.herokuapp.com',
       :port => 587,
