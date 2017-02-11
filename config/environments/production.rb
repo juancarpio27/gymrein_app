@@ -92,10 +92,10 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { :host => 'http://gymrein.herokuapp.com' }
 
   config.action_mailer.smtp_settings = {
-      :user_name => "juan.carpio01@gmail.com",
+      :user_name => "app63372440@heroku.com",
       :password =>"21290569",
-      :address => 'smtp.sendgrid.com',
-      :domain => 'gmail.com',
+      :address => 'smtp.sendgrid.net',
+      :domain => 'herokuapp.com',
       :port => 587,
       :authentication => :plain,
       :enable_starttls_auto => true
