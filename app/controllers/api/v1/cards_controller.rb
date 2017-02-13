@@ -18,6 +18,16 @@ class Api::V1::CardsController < Api::ApiController
     end
   end
 
+  #DELETE /api/v1/cards/:id
+  def destroy
+    @card =  @api_key.user.cards.find(params[:id])
+    if @card.destroy
+      render json: @card.as_josn
+    else
+      redner json: {errors: "Not possible to remove card"},statud: 417
+    end
+  end
+
   protected
 
   def card_params

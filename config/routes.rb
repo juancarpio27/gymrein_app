@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       constraints(format: 'json') do
 
-        resource :users, only: [:create]
+        resource :users, only: [:create, :update]
 
         resource :sessions, only: [:destroy] do
           collection {
@@ -15,7 +15,7 @@ Rails.application.routes.draw do
           }
         end
 
-        resources :cards, only: [:index, :create] do
+        resources :cards, only: [:index, :create, :destroy] do
 
         end
 

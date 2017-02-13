@@ -73,6 +73,19 @@ RSpec.describe Api::V1::CardsController, type: :controller do
     end
   end
 
+  describe "delete card" do
+    before :each do
+      @api_key = FactoryGirl.create(:api_key)
+      @card = FactoryGirl.create(:card, user: @api_key.user)
+      request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(@api_key.access_token)
+    end
+
+    it "successfully destroy the card" do
+      delete :destroy, id: @card.id
+      expect(@api_key.user.cards.count).to eq 0
+    end
+  end
+
 
 
 end
