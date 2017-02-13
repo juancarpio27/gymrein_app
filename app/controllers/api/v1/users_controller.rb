@@ -13,7 +13,7 @@ class Api::V1::UsersController < Api::ApiController
   protected
 
   def user_params
-    params.require(:user).permit(:name, :lastname, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :lastname, :email, :password, :password_confirmation, :phone)
   end
 
 end

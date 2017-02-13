@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true, length: {in: 2..75}
   validates :lastname, presence: true, length: {in: 2..90}
+  validates :phone, presence: true, length: {in: 1..14}
 
   has_many :api_keys
   has_many :sessions

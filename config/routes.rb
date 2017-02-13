@@ -15,7 +15,7 @@ Rails.application.routes.draw do
           }
         end
 
-        resources :cards, format: true, only: [:index, :create] do
+        resources :cards, only: [:index, :create] do
 
         end
 

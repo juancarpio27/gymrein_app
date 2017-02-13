@@ -5,5 +5,6 @@ class Session < ApplicationRecord
   belongs_to :user
   belongs_to :api_key
 
+  validates :platform, presence: true
 
 end

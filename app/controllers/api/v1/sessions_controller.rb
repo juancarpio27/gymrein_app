@@ -8,7 +8,7 @@ class Api::V1::SessionsController < Api::ApiController
       session.create_api_key(user: user)
       render json: user.as_json(methods: [:access_token])
     else
-      render json: {succes: false}
+      render json: {success: false}
     end
 
   end

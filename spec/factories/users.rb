@@ -7,5 +7,6 @@ FactoryGirl.define do
     u.email { Faker::Internet.email }
     u.password "12345678"
     u.password_confirmation "12345678"
+    u.phone "5512341234"
   end
 end
