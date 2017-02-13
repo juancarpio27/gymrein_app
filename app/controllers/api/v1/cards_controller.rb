@@ -22,7 +22,7 @@ class Api::V1::CardsController < Api::ApiController
   def destroy
     @card =  @api_key.user.cards.find(params[:id])
     if @card.destroy
-      render json: @card.as_josn
+      render json: @card.as_json
     else
       redner json: {errors: "Not possible to remove card"},statud: 417
     end
