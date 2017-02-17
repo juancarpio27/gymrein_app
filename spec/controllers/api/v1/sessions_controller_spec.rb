@@ -11,8 +11,8 @@ RSpec.describe Api::V1::SessionsController, type: :controller do
       post :plain, email: @user.email, password: "12345678"
       expect(response).to be_success
       json = JSON.parse(response.body)
-      expect(json['email']).to eq @user.email
-      expect(json['access_token']).to_not eq ""
+      expect(json['user']['email']).to eq @user.email
+      expect(json['user']['access_token']).to_not eq ""
     end
 
     it "returns error for wrong password" do
