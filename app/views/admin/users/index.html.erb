@@ -1,0 +1,15 @@
+<h1>Usuarios</h1>
+
+<table class="table table-striped">
+  <% @users.each do |user| %>
+      <tr>
+        <td><%= user.full_name %></td>
+        <td><%= user.email %></td>
+        <td><%= link_to "Detalles", admin_user_path(user) %></td>
+      </tr>
+  <% end %>
+</table>
+
+<%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+
+<%= link_to "Nuevo usuario", new_admin_user_path %>

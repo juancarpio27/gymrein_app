@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GymreinApp</title>
+  <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track'=> 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track'=> 'reload' %>
+</head>
+
+<body>
+
+<% if current_user %>
+    <div id="wrapper">
+
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Gymrein</a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li>
+                <%= link_to "Cerrar sesión", admin_log_out_path %>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </nav>
+
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+            <a href="#">
+              Administración
+            </a>
+          </li>
+          <li>
+            <%= link_to "Usuarios", admin_users_path %>
+          </li>
+        </ul>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <%= yield %>
+        </div>
+      </div>
+      <!-- /#page-content-wrapper -->
+
+    </div>
+<% else %>
+    <%= yield %>
+<% end %>
+
+
+</body>
+</html>
