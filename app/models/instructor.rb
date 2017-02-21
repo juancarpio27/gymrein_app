@@ -9,6 +9,9 @@ class Instructor < ApplicationRecord
                            }
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
+  validates :name, presence: true
+  validates :lastname, presence: true
+
   def full_name
     name + ' ' + lastname
   end

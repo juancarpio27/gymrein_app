@@ -2,6 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Admin::EventsController, type: :controller do
 
+  before :each do
+    @admin = FactoryGirl.create(:admin)
+    session[:admin_id] = @admin.id
+  end
+
   describe "GET #new" do
     it "returns http success" do
       get :new
@@ -10,29 +15,32 @@ RSpec.describe Admin::EventsController, type: :controller do
   end
 
   describe "GET #index" do
-    it "returns http success" do
+    it "redirect to event index" do
       get :index
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET #edit" do
-    it "returns http success" do
-      get :edit
+
+    before :each do
+      @event = FactoryGirl.create(:event)
+    end
+
+    it "redirect to event" do
+      get :edit, id: @event.id
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET #show" do
-    it "returns http success" do
-      get :show
-      expect(response).to have_http_status(:success)
-    end
-  end
 
-  describe "GET #destroy" do
+    before :each do
+      @event = FactoryGirl.create(:event)
+    end
+
     it "returns http success" do
-      get :destroy
+      get :show, id: @event.id
       expect(response).to have_http_status(:success)
     end
   end

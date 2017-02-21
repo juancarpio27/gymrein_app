@@ -2,6 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Admin::LocationsController, type: :controller do
 
+  before :each do
+    @admin = FactoryGirl.create(:admin)
+    session[:admin_id] = @admin.id
+  end
+
   describe "GET #index" do
     it "returns http success" do
       get :index
@@ -17,15 +22,25 @@ RSpec.describe Admin::LocationsController, type: :controller do
   end
 
   describe "GET #edit" do
+
+    before :each do
+      @location = FactoryGirl.create(:location)
+    end
+
     it "returns http success" do
-      get :edit
+      get :edit, id: @location
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET #show" do
+
+    before :each do
+      @location = FactoryGirl.create(:location)
+    end
+
     it "returns http success" do
-      get :show
+      get :show, id: @location
       expect(response).to have_http_status(:success)
     end
   end
