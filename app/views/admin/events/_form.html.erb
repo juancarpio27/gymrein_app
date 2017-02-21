@@ -1,0 +1,28 @@
+<%= form_for [:admin, @event], html: { multipart: true } do  |f| %>
+    <% if @event.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@event.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+          <ul>
+            <% @event.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+
+    <div class="form-group">
+      <%= f.text_field :name, {class: 'form-control', placeholder: "Nombre"} %>
+    </div>
+    <div class="form-group">
+      <%= f.text_field :description, {class: 'form-control', placeholder: "Descripción"} %>
+    </div>
+    <%= f.file_field :logo %>
+
+
+    <div class="actions">
+      <%= f.submit 'Guardar' , class: "btn btn-primary" %>
+    </div>
+
+<% end %>

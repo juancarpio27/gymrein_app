@@ -35,6 +35,9 @@ Rails.application.routes.draw do
     resources :admins
     resources :sessions
     resources :users
+    resources :instructors
+    resources :locations
+    resources :events
   end
 
 end

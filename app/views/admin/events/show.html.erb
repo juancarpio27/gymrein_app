@@ -1,0 +1,20 @@
+<h2>Detalles</h2>
+
+<div class="row">
+  <div class="col-md-2">
+    <%= image_tag @event.logo.url(:thumb) %>
+  </div>
+  <div class="col-md-9">
+    <h3>ID clase: <%= @event.id %></h3>
+  </div>
+</div>
+<br>
+<table class="table table-striped">
+  <tr>
+    <td><%=@event.name %></td>
+    <td><%=@event.description %></td>
+  </tr>
+</table>
+
+<%= link_to "Editar", edit_admin_event_path(@event) %>
+<%= link_to "Regresar", admin_events_path %>

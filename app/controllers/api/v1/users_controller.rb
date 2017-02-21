@@ -5,6 +5,7 @@ class Api::V1::UsersController < Api::ApiController
   #POST /api/v1/users
   def create
     @user = User.new(user_params)
+    @user.avatar = params[:avatar]
     if @user.save
       render json: @user.as_json
     else

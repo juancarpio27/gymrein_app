@@ -1,0 +1,24 @@
+<h2>Detalles</h2>
+
+<div class="row">
+  <div class="col-md-2">
+    <%= image_tag @instructor.avatar.url(:thumb) %>
+  </div>
+  <div class="col-md-9">
+    <h3>ID instructor: <%= @instructor.id %></h3>
+  </div>
+</div>
+<br>
+<table class="table table-striped">
+  <tr>
+    <td><%=@instructor.full_name %></td>
+  </tr>
+</table>
+
+<div class="well">
+  <%= @instructor.biography %>
+</div>
+
+
+<%= link_to "Editar", edit_admin_instructor_path(@instructor) %>
+<%= link_to "Regresar", admin_instructors_path %>

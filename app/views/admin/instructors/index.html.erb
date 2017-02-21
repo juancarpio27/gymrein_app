@@ -1,0 +1,16 @@
+<h1>Instructores</h1>
+
+<table class="table table-striped">
+  <% @instructors.each do |instructor| %>
+      <tr>
+        <td><%= instructor.full_name %></td>
+        <td><%= link_to "Detalles", admin_instructor_path(instructor) %></td>
+        <td><%= link_to "Editar", edit_admin_instructor_path(instructor) %></td>
+        <td><%= link_to "Borrar", admin_instructor_path(instructor), method: :delete %></td>
+      </tr>
+  <% end %>
+</table>
+
+<%= will_paginate @instructors, renderer: BootstrapPagination::Rails %>
+
+<%= link_to "Agregar", new_admin_instructor_path %>

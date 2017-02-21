@@ -22,6 +22,28 @@ class Admin::UsersController < AdminController
     @user = User.find(params[:id])
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      redirect_to admin_users_path
+    else
+      render new_admin_user_path
+    end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+      redirect_to admin_users_path
+    else
+      redirect_to admin_users_path
+    end
+  end
+
   protected
 
   def user_params

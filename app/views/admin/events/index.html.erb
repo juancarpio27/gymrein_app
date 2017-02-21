@@ -1,0 +1,17 @@
+<h1>Clases</h1>
+
+<table class="table table-striped">
+  <% @events.each do |event| %>
+      <tr>
+        <td><%= event.name %></td>
+        <td><%= link_to "Detalles", admin_event_path(event) %></td>
+        <td><%= link_to "Editar", edit_admin_event_path(event) %></td>
+        <td><%= link_to "Borrar", admin_event_path(event), method: :delete %></td>
+      </tr>
+  <% end %>
+</table>
+
+<%= will_paginate @events, renderer: BootstrapPagination::Rails %>
+
+
+<%= link_to "Agregar", new_admin_event_path %>

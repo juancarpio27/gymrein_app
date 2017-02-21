@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170220231200) do
+ActiveRecord::Schema.define(version: 20170221034704) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -38,6 +38,38 @@ ActiveRecord::Schema.define(version: 20170220231200) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.index ["user_id"], name: "index_cards_on_user_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string   "name",              limit: 75, null: false
+    t.text     "description"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+  end
+
+  create_table "instructors", force: :cascade do |t|
+    t.string   "name",                limit: 75, null: false
+    t.string   "lastname",            limit: 75, null: false
+    t.text     "biography"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "name",         null: false
+    t.string   "address",      null: false
+    t.time     "opening_hour", null: false
+    t.time     "closing_hour", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "sessions", force: :cascade do |t|

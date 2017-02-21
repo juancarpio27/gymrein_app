@@ -1,0 +1,15 @@
+<h2>Detalles</h2>
+
+<table class="table table-striped">
+  <tr>
+    <td><%=@location.id %></td>
+    <td><%=@location.name %></td>
+    <td><%=@location.address %></td>
+    <td><%=@location.opening_hour %></td>
+    <td><%=@location.closing_hour %></td>
+  </tr>
+</table>
+
+
+<%= link_to "Editar", edit_admin_location_path(@location) %>
+<%= link_to "Regresar", admin_locations_path %>
