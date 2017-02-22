@@ -1,4 +1,10 @@
 class User < ApplicationRecord
+
+  module Json
+    SHOW = {only: [:id, :name, :lastname, :email, :phone, :avatar_file_name, :avatar_content_type], methods: [:access_token, :avatar_url]}
+  end
+
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -28,5 +34,11 @@ class User < ApplicationRecord
   def full_name
     name + ' ' + lastname
   end
+
+  def avatar_url
+    self.avatar.url
+  end
+
+
 
 end

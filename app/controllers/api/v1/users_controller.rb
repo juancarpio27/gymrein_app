@@ -7,7 +7,7 @@ class Api::V1::UsersController < Api::ApiController
     @user = User.new(user_params)
     @user.avatar = params[:avatar]
     if @user.save
-      render json: @user.as_json
+      render json: @user.as_json(@user.class::Json::SHOW)
     else
       render json: {errors: @user.errors.full_messages }, status: 422
     end
@@ -16,7 +16,7 @@ class Api::V1::UsersController < Api::ApiController
   #PATCH /api/v1/users
   def update
     if @api_key.user.update(user_params)
-      render json: @user.as_json
+      render json: @user.as_json(@user.class::Json::SHOW)
     else
       render json: {errors: @user.errors.full_messages }, status: 422
     end
