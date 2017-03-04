@@ -35,7 +35,7 @@ RSpec.describe Api::V1::CardsController, type: :controller do
     end
 
     it "successfully creates a card" do
-      post :create, card: {number: "1234", holder_name: "testing", expiration_month: 12,
+      post :create, card: {number: "1234123412341234", holder_name: "testing", expiration_month: 12,
                            expiration_year: 18, brand: "mc"  }
       expect(response).to be_success
       json = JSON.parse(response.body)
@@ -52,22 +52,22 @@ RSpec.describe Api::V1::CardsController, type: :controller do
       expect(response.status).to eq 422
     end
     it "returns error with empty holder_name" do
-      post :create, card: {number: "1234", expiration_month: 12,
+      post :create, card: {number: "1234123412341234", expiration_month: 12,
                            expiration_year: 18, brand: "mc"  }
       expect(response.status).to eq 422
     end
     it "returns error with empty expiration_month" do
-      post :create, card: {number: "1234", holder_name: "testing",
+      post :create, card: {number: "1234123412341234", holder_name: "testing",
                            expiration_year: 18, brand: "mc"  }
       expect(response.status).to eq 422
     end
     it "returns error with empty expiration_year" do
-      post :create, card: {number: "1234", holder_name: "testing", expiration_month: 12,
+      post :create, card: {number: "1234123412341234", holder_name: "testing", expiration_month: 12,
                            brand: "mc"  }
       expect(response.status).to eq 422
     end
     it "returns error with empty brand" do
-      post :create, card: {number: "1234", holder_name: "testing", expiration_month: 12,
+      post :create, card: {number: "1234123412341234", holder_name: "testing", expiration_month: 12,
                            expiration_year: 18 }
       expect(response.status).to eq 422
     end

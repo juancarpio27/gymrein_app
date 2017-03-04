@@ -1,9 +1,10 @@
 class User < ApplicationRecord
 
   module Json
-    SHOW = {only: [:id, :name, :lastname, :email, :phone, :avatar_file_name, :avatar_content_type], methods: [:access_token, :avatar_url]}
+    SHOW = {only: [:id, :name, :lastname, :email, :phone, :birth, :sex, :avatar_file_name, :avatar_content_type], methods: [:access_token, :avatar_url]}
   end
 
+  enum sex: [:female, :male]
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -20,6 +21,8 @@ class User < ApplicationRecord
   validates :name, presence: true, length: {in: 2..75}
   validates :lastname, presence: true, length: {in: 2..90}
   validates :phone, presence: true, length: {in: 1..14}
+  validates :birth, presence: true
+  validates :sex, presence: true
 
   has_many :api_keys
   has_many :sessions

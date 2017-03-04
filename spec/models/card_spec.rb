@@ -22,4 +22,10 @@ RSpec.describe Card, type: :model do
   it "is invalid without brand" do
     FactoryGirl.build(:card, brand: nil).should_not be_valid
   end
+
+  it "correctly sanitize card number" do
+    card = FactoryGirl.create(:card, number: "1234123412341234")
+    expect(card.number).to eq "1234"
+  end
+
 end

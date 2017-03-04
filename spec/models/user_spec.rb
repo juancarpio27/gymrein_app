@@ -16,6 +16,12 @@ RSpec.describe User, type: :model do
   it "is invalid without phone" do
     FactoryGirl.build(:user, phone: nil).should_not be_valid
   end
+  it "is invalid without birth" do
+    FactoryGirl.build(:user, birth: nil).should_not be_valid
+  end
+  it "is invalid without sex" do
+    FactoryGirl.build(:user, sex: nil).should_not be_valid
+  end
   it "doesn't allow repeated email" do
     user = FactoryGirl.create(:user)
     FactoryGirl.build(:user, email: user.email).should_not be_valid

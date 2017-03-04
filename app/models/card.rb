@@ -8,4 +8,10 @@ class Card < ApplicationRecord
   validates :expiration_year, presence: true
   validates :brand, presence: true
 
+  before_save :sanitize_params
+
+  def sanitize_params
+    self.number = self.number.last(4)
+  end
+
 end

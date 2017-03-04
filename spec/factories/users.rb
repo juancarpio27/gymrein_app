@@ -8,5 +8,7 @@ FactoryGirl.define do
     u.password "12345678"
     u.password_confirmation "12345678"
     u.phone "5512341234"
+    u.sex { Faker::Number.between(0,1) }
+    u.birth "01-01-2016"
   end
 end

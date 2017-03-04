@@ -7,6 +7,8 @@ class Api::V1::UsersController < Api::ApiController
     @user = User.new(user_params)
     @user.avatar = params[:avatar]
     if @user.save
+      session = @user.sessions.build(platform: params[:platform])
+      session.create_api_key(user: @user)
       render json: @user.as_json(@user.class::Json::SHOW)
     else
       render json: {errors: @user.errors.full_messages }, status: 422
@@ -25,7 +27,7 @@ class Api::V1::UsersController < Api::ApiController
   protected
 
   def user_params
-    params.require(:user).permit(:name, :lastname, :email, :password, :password_confirmation, :phone, :avatar)
+    params.require(:user).permit(:name, :lastname, :email, :password, :password_confirmation, :phone, :avatar, :birth, :sex)
   end
 
 end
