@@ -38,6 +38,8 @@ Rails.application.routes.draw do
     resources :instructors
     resources :locations
     resources :events
+    resources :packages
+    resources :promotions
   end
 
 end

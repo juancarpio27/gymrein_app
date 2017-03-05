@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170303183332) do
+ActiveRecord::Schema.define(version: 20170305210333) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -70,6 +70,23 @@ ActiveRecord::Schema.define(version: 20170303183332) do
     t.time     "closing_hour", null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "packages", force: :cascade do |t|
+    t.string   "name",       limit: 100, null: false
+    t.integer  "price",                  null: false
+    t.integer  "classes",                null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "promotions", force: :cascade do |t|
+    t.string   "code",           limit: 10, null: false
+    t.integer  "promotion_type",            null: false
+    t.datetime "expiration",                null: false
+    t.integer  "amount",                    null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "sessions", force: :cascade do |t|

@@ -1,0 +1,16 @@
+<h1>Promociones</h1>
+
+<table class="table table-striped">
+  <% @promotions.each do |promotion| %>
+      <tr>
+        <td><%= promotion.code %></td>
+        <td><%= link_to "Detalles", admin_promotion_path(promotion) %></td>
+        <td><%= link_to "Editar", edit_admin_promotion_path(promotion) %></td>
+        <td><%= link_to "Borrar", admin_promotion_path(promotion), method: :delete %></td>
+      </tr>
+  <% end %>
+</table>
+
+<%= will_paginate @promotions, renderer: BootstrapPagination::Rails %>
+
+<%= link_to "Nueva promoción", new_admin_promotion_path %>

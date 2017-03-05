@@ -1,0 +1,16 @@
+<h1>Paquetes</h1>
+
+<table class="table table-striped">
+  <% @packages.each do |package| %>
+      <tr>
+        <td><%= package.name %></td>
+        <td><%= link_to "Detalles", admin_package_path(package) %></td>
+        <td><%= link_to "Editar", edit_admin_package_path(package) %></td>
+        <td><%= link_to "Borrar", admin_package_path(package), method: :delete %></td>
+      </tr>
+  <% end %>
+</table>
+
+<%= will_paginate @packages, renderer: BootstrapPagination::Rails %>
+
+<%= link_to "Nuevo paquete", new_admin_package_path %>

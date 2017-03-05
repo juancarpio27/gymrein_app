@@ -24,7 +24,7 @@ class Api::V1::CardsController < Api::ApiController
     if @card.destroy
       render json: @card.as_json
     else
-      redner json: {errors: "Not possible to remove card"},statud: 417
+      redner json: {errors: "Not possible to remove card"},status: 417
     end
   end
 

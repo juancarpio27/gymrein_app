@@ -1,0 +1,21 @@
+<h2>Detalles</h2>
+
+<div class="row">
+
+  <h3>ID paquete: <%= @package.id %></h3>
+
+</div>
+<br>
+<table class="table table-striped">
+  <tr>
+    <td><%= @package.name %></td>
+    <td><%= @package.price %></td>
+    <td><%= @package.classes %></td>
+  </tr>
+</table>
+
+
+
+
+<%= link_to "Editar", edit_admin_package_path(@package) %>
+<%= link_to "Regresar", admin_packages_path %>

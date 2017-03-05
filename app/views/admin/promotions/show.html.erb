@@ -1,0 +1,22 @@
+<h2>Detalles</h2>
+
+<div class="row">
+
+  <h3>ID promoción: <%= @promotion.id %></h3>
+
+</div>
+<br>
+<table class="table table-striped">
+  <tr>
+    <td><%= @promotion.code %></td>
+    <td><%= @promotion.promotion_type %></td>
+    <td><%= @promotion.expiration %></td>
+    <td><%= @promotion.amount %></td>
+  </tr>
+</table>
+
+
+
+
+<%= link_to "Editar", edit_admin_promotion_path(@promotion) %>
+<%= link_to "Regresar", admin_promotions_path %>
