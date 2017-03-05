@@ -17,11 +17,11 @@ RSpec.describe Api::V1::CardsController, type: :controller do
       i = 0
       card_array = [@card]
       card_array.each do |card|
-        json[i]['brand'] = card.brand
-        json[i]['holder_name'] = card.brand
-        json[i]['number'] = card.number
-        json[i]['expiration_month'] = card.brand
-        json[i]['expiration_year'] = card.brand
+        expect(json[i]['brand']).to eq card.brand
+        expect(json[i]['holder_name']).to eq card.holder_name
+        expect(json[i]['number']).to eq card.number
+        expect(json[i]['expiration_month']).to eq card.expiration_month
+        expect(json[i]['expiration_year']).to eq card.expiration_year
         i += 1
       end
     end

@@ -16,10 +16,25 @@ Rails.application.routes.draw do
           }
         end
 
+        resource :api_keys, only: [] do
+          collection {
+            post 'validate'
+          }
+        end
+
         resources :cards, only: [:index, :create, :destroy] do
 
         end
 
+        resources :packages, only: [:index, :show] do
+
+        end
+
+        resources :promotions, only: [] do
+          collection {
+            post 'validate'
+          }
+        end
 
       end
     end
