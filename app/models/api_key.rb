@@ -3,7 +3,7 @@ class ApiKey < ApplicationRecord
   before_create :generate_access_token
 
   belongs_to :user
-  has_one :session
+  has_one :session, dependent: :nullify
 
   protected
 
