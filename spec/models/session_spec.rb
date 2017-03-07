@@ -12,7 +12,7 @@ RSpec.describe Session, type: :model do
     user = FactoryGirl.build(:user)
     FactoryGirl.create(:session, user: user)
     session = FactoryGirl.create(:session, user: user)
-    expect(user.sessions.count).to eq 1
+    expect(user.sessions.where.not(deleted_at: nil).count).to eq 1
     expect(user.sessions.last).to eq session
   end
 

@@ -10,7 +10,7 @@ RSpec.describe Api::V1::PackagesController, type: :controller do
     request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(@api_key.access_token)
   end
 
-  it "successfully returns list of cards" do
+  it "successfully returns list of packages" do
     get :index
     expect(response).to be_success
     json = JSON.parse(response.body)

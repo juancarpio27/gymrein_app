@@ -7,10 +7,22 @@ class Session < ApplicationRecord
 
   validates :platform, presence: true
 
-  after_create :delete_previous
+  scope :exclude, ->(id) { where.not(id: id) }
+  scope :active, -> { where(deleted_at: nil) }
 
-  def delete_previous
-    Session.where.not(id: self.id).where(user_id: self.id).destroy_all
+  after_create :delete_previous_session
+
+  def delete!
+    update!(deleted_at: Time.now)
+    api_key.destroy! unless api_key.nil?
+  end
+
+  def delete_previous_session
+    transaction do
+      user.sessions.active.exclude(self.id).each do |session|
+        session.delete!
+      end
+    end
   end
 
 end
