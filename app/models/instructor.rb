@@ -15,4 +15,8 @@ class Instructor < ApplicationRecord
   def full_name
     name + ' ' + lastname
   end
+
+  def avatar_url
+    self.avatar.url
+  end
 end

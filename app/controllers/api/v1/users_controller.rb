@@ -24,6 +24,16 @@ class Api::V1::UsersController < Api::ApiController
     end
   end
 
+  #POST /api/v1/users/validate
+  def validate
+    user = User.find_by_email(params[:email])
+    if user.blank?
+      render json: {exists: false}
+    else
+      render json: {exists: true}
+    end
+  end
+
   protected
 
   def user_params

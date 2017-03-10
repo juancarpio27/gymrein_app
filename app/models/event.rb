@@ -7,4 +7,8 @@ class Event < ApplicationRecord
                                medium: '300x300>'
                            }
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
+
+  def logo_url
+    self.logo.url
+  end
 end

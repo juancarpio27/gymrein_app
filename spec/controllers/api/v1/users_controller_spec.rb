@@ -152,6 +152,27 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       expect(response.status).to eq 422
     end
 
+  end
+
+  describe "email validation" do
+
+    before :each do
+      @user = FactoryGirl.create(:user)
+    end
+
+    it "returns true for existing email" do
+      post :validate, email: @user.email
+      expect(response.status).to eq 200
+      json = JSON.parse(response.body)
+      expect(json['exists']).to eq true
+    end
+
+    it "returns false for existing email" do
+      post :validate, email: "non-existing@non.com"
+      expect(response.status).to eq 200
+      json = JSON.parse(response.body)
+      expect(json['exists']).to eq false
+    end
 
   end
 

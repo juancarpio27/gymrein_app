@@ -8,7 +8,11 @@ Rails.application.routes.draw do
     namespace :v1 do
       constraints(format: 'json') do
 
-        resource :users, only: [:create, :update]
+        resource :users, only: [:create, :update] do
+          collection {
+            post 'validate'
+          }
+        end
 
         resource :sessions, only: [:destroy] do
           collection {
@@ -22,13 +26,13 @@ Rails.application.routes.draw do
           }
         end
 
-        resources :cards, only: [:index, :create, :destroy] do
+        resources :cards, only: [:index, :create, :destroy]
+        resources :packages, only: [:index, :show]
+        resources :instructors, only: [:show]
+        resources :events, only: [:show]
+        resources :locations, only: [:show]
 
-        end
-
-        resources :packages, only: [:index, :show] do
-
-        end
+        resources :user_packages, only: [:create]
 
         resources :promotions, only: [] do
           collection {

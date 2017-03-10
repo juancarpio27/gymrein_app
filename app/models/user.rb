@@ -27,6 +27,7 @@ class User < ApplicationRecord
   has_many :api_keys
   has_many :sessions
   has_many :cards
+  has_many :user_packages
 
   self.per_page = 20
 
@@ -40,6 +41,11 @@ class User < ApplicationRecord
 
   def avatar_url
     self.avatar.url
+  end
+
+  def update_classes(n)
+    available_classes = self.available_classes + n
+    self.save!
   end
 
 

@@ -7,6 +7,8 @@ class Promotion < ApplicationRecord
   validates :expiration, presence: true
   validates :amount, presence: true
 
+  has_many :user_packages
+
   self.per_page = 20
 
 

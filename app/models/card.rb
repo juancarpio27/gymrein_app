@@ -2,6 +2,8 @@ class Card < ApplicationRecord
 
   belongs_to :user
 
+  has_many :user_packages
+
   validates :holder_name, presence: true
   validates :number, presence: true
   validates :expiration_month, presence: true
