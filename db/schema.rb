@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170313004723) do
+ActiveRecord::Schema.define(version: 20170313035748) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 20170313004723) do
     t.integer  "duration"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "limit"
+    t.integer  "available"
   end
 
   create_table "events", force: :cascade do |t|
