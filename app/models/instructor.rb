@@ -12,6 +12,8 @@ class Instructor < ApplicationRecord
   validates :name, presence: true
   validates :lastname, presence: true
 
+  has_many :class_dates
+
   def full_name
     name + ' ' + lastname
   end

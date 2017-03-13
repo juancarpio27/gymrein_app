@@ -28,6 +28,8 @@ class User < ApplicationRecord
   has_many :sessions
   has_many :cards
   has_many :user_packages
+  has_many :reservations
+  has_many :waiting_lists
 
   self.per_page = 20
 

@@ -8,6 +8,8 @@ class Event < ApplicationRecord
                            }
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
 
+  has_many :class_dates
+
   def logo_url
     self.logo.url
   end
