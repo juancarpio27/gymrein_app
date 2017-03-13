@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170310014103) do
+ActiveRecord::Schema.define(version: 20170313002309) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -127,7 +127,7 @@ ActiveRecord::Schema.define(version: 20170310014103) do
     t.string   "unconfirmed_email"
     t.string   "name",                   limit: 75,              null: false
     t.string   "lastname",               limit: 75,              null: false
-    t.integer  "available_classes"
+    t.integer  "available_classes",                 default: 0,  null: false
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
     t.string   "phone",                  limit: 13

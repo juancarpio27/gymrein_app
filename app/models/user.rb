@@ -44,7 +44,7 @@ class User < ApplicationRecord
   end
 
   def update_classes(n)
-    available_classes = self.available_classes + n
+    self.available_classes = self.available_classes + n
     self.save!
   end
 

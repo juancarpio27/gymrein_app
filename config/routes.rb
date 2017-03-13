@@ -32,7 +32,7 @@ Rails.application.routes.draw do
         resources :events, only: [:show]
         resources :locations, only: [:show]
 
-        resources :user_packages, only: [:create]
+        resources :user_packages, only: [:create, :index]
 
         resources :promotions, only: [] do
           collection {

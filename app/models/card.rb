@@ -2,7 +2,7 @@ class Card < ApplicationRecord
 
   belongs_to :user
 
-  has_many :user_packages
+  has_many :user_packages, dependent: :nullify
 
   validates :holder_name, presence: true
   validates :number, presence: true
