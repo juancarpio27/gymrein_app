@@ -5,7 +5,14 @@ class Api::V1::UsersController < Api::ApiController
   #POST /api/v1/users
   def create
     @user = User.new(user_params)
-    @user.avatar = params[:avatar]
+    if params[:platform] == "ios"
+      @user.avatar = params[:avatar]
+    else
+      file = Paperclip.io_adapters.for(params[:avatar])
+      file.original_filename = "name_image"
+      @user.avatar = file
+    end
+
     if @user.save
       session = @user.sessions.build(platform: params[:platform])
       session.create_api_key(user: @user)

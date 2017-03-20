@@ -40,6 +40,12 @@ Rails.application.routes.draw do
           }
         end
 
+        resources :reservations, only: [] do
+          collection {
+            post 'find_by_date'
+          }
+        end
+
       end
     end
   end

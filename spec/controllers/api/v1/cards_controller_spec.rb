@@ -36,7 +36,7 @@ RSpec.describe Api::V1::CardsController, type: :controller do
 
     it "successfully creates a card" do
       post :create, card: {number: "1234123412341234", holder_name: "testing", expiration_month: 12,
-                           expiration_year: 18, brand: "mc"  }
+                           expiration_year: 18, brand: "mc", cvv: 123  }
       expect(response).to be_success
       json = JSON.parse(response.body)
       expect(json['number']).to eq "1234"
