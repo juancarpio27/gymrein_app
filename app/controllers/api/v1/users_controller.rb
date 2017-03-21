@@ -5,13 +5,15 @@ class Api::V1::UsersController < Api::ApiController
   #POST /api/v1/users
   def create
     @user = User.new(user_params)
-    if params[:platform] == "ios"
-      @user.avatar = params[:avatar]
-    else
-      base = StringIO.new(Base64.decode64(params[:avatar]))
-      file = Paperclip.io_adapters.for(base)
-      file.original_filename = "name_image"
-      @user.avatar = file
+    if params[:avatar]
+      if params[:platform] == "ios"
+        @user.avatar = params[:avatar]
+      else
+        base = StringIO.new(Base64.decode64(params[:avatar]))
+        file = Paperclip.io_adapters.for(base)
+        file.original_filename = "name_image"
+        @user.avatar = file
+      end
     end
 
     if @user.save
