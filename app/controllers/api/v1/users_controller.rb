@@ -8,7 +8,8 @@ class Api::V1::UsersController < Api::ApiController
     if params[:platform] == "ios"
       @user.avatar = params[:avatar]
     else
-      file = Paperclip.io_adapters.for(params[:avatar])
+      base = StringIO.new(Base64.decode64(params[:avatar]))
+      file = Paperclip.io_adapters.for(base)
       file.original_filename = "name_image"
       @user.avatar = file
     end
