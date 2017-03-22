@@ -11,4 +11,9 @@ class Reservation < ApplicationRecord
     self.class_date.event.logo_url
   end
 
+  def check_in
+    self.assisted = true
+    self.save!
+  end
+
 end

@@ -31,6 +31,9 @@ class User < ApplicationRecord
   has_many :reservations
   has_many :waiting_lists
 
+  has_many :class_dates, through: :reservations
+  has_many :class_waiting, through: :waiting_lists, source: :class_date
+
   self.per_page = 20
 
   def access_token
@@ -50,6 +53,17 @@ class User < ApplicationRecord
     self.save!
   end
 
+  def has_existing_class(time,duration)
+    if time.is_a? String
+      start = DateTime.parse(time)
+    else
+      start = time
+    end
 
+    finish_date = start + duration.minutes
+    reservations = self.class_dates.where('date < ? and finish > ?',finish_date,start)
+    waiting = self.class_waiting.where('date < ? and finish > ?',finish_date,start)
+    reservations.any? or waiting.any?
+  end
 
 end

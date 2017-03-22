@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         resource :users, only: [:create, :update] do
           collection {
             post 'validate'
+            post 'send_password_recovery'
           }
         end
 
@@ -33,6 +34,11 @@ Rails.application.routes.draw do
         resources :locations, only: [:show]
 
         resources :user_packages, only: [:create, :index]
+        resources :class_dates, only: [:show] do
+          collection {
+            post 'find_by_date'
+          }
+        end
 
         resources :promotions, only: [] do
           collection {
@@ -40,11 +46,15 @@ Rails.application.routes.draw do
           }
         end
 
-        resources :reservations, only: [] do
+        resources :reservations, only: [:create] do
           collection {
             post 'find_by_date'
           }
+          member do
+            post 'check_in'
+          end
         end
+        resources :waiting_lists, only: [:create, :index, :show, :destroy]
 
       end
     end

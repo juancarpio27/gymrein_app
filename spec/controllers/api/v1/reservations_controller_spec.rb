@@ -47,4 +47,63 @@ RSpec.describe Api::V1::ReservationsController, type: :controller do
 
   end
 
+
+  describe "check in" do
+    it "succesfully check in" do
+      post :check_in, id: @reservation_1.id
+      expect(response).to be_success
+      json = JSON.parse(response.body)
+      expect(json['success']).to eq true
+      expect(@reservation_1.reload.assisted).to eq true
+      expect(@reservation_2.reload.assisted).to eq false
+      expect(@reservation_3.reload.assisted).to eq false
+    end
+
+    it "returns already checked in" do
+      @reservation_1.check_in
+      post :check_in, id: @reservation_1.id
+      expect(response).to be_success
+      json = JSON.parse(response.body)
+      expect(json['success']).to eq "Already checked in"
+    end
+  end
+
+  describe "create reservation" do
+    it "successfully creates reservation" do
+      @boxing = FactoryGirl.create(:class_date, date: '01-04-2017 14:00')
+      spaces = @boxing.available
+      post :create, reservation: {class_date_id: @boxing.id}
+      expect(response).to be_success
+      json = JSON.parse(response.body)
+      expect(@boxing.reload.available).to eq spaces - 1
+      expect(json['success']).to eq true
+      expect(json['reservation']['class_date_id']).to eq @boxing.id
+      expect(json['reservation']['user_id']).to eq @api_key.user.id
+      expect(json['reservation']['assisted']).to eq false
+    end
+
+    it "returns error for overlapping class" do
+      @boxing = FactoryGirl.create(:class_date, date: '01-01-2017 10:00')
+      spaces = @boxing.available
+      post :create, reservation: {class_date_id: @boxing.id}
+      expect(response).to be_success
+      json = JSON.parse(response.body)
+      expect(@boxing.reload.available).to eq spaces
+      expect(json['success']).to eq false
+      expect(json['error']).to eq 'Already have a scheduled class'
+    end
+
+    it "returns error when class is full" do
+      boxing = FactoryGirl.create(:class_date, available: 0)
+      post :create, reservation: {class_date_id: boxing.id}
+      expect(response).to be_success
+      json = JSON.parse(response.body)
+      expect(boxing.reload.available).to eq 0
+      expect(json['success']).to eq false
+      expect(json['error']).to eq 'Class is full'
+    end
+
+  end
+
+
 end

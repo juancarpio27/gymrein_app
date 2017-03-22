@@ -176,5 +176,27 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
   end
 
+  describe "password recovery" do
+    before :each do
+      @user = FactoryGirl.create(:user)
+    end
+
+    it "successfully send email to user" do
+      post :send_password_recovery, email: @user.email
+      expect(response.status).to eq 200
+      json = JSON.parse(response.body)
+      expect(json['success']).to eq true
+      expect(json['message']).to eq 'Confirmation email sent'
+    end
+
+    it "returns error for non existing mail" do
+      post :send_password_recovery, email: "non-existing@non.com"
+      expect(response.status).to eq 200
+      json = JSON.parse(response.body)
+      expect(json['success']).to eq false
+      expect(json['error']).to eq 'Mail does not exists'
+    end
+  end
+
 
 end

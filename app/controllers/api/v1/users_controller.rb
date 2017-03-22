@@ -44,6 +44,16 @@ class Api::V1::UsersController < Api::ApiController
     end
   end
 
+  #POST /api/v1/users/send_password_recovery
+  def send_password_recovery
+    user = User.find_by_email(params[:email])
+    if user
+      render json: {success: true, message: 'Confirmation email sent'}
+    else
+      render json: {success: false, error: 'Mail does not exists'}
+    end
+  end
+
   protected
 
   def user_params
