@@ -31,7 +31,7 @@ RSpec.describe Api::V1::ReservationsController, type: :controller do
       expect(json.count).to eq 2
       classes =  [@spinning, @crossfit]
       classes.each_index do |i|
-        expect(json[i]['class_date_name']['name']).to eq classes[i].event.name
+        expect(json[i]['class_date']['event_id']).to eq classes[i].event.id
       end
     end
 
@@ -42,7 +42,7 @@ RSpec.describe Api::V1::ReservationsController, type: :controller do
       expect(json.count).to eq 1
       classes =  [@running]
       classes.each_index do |i|
-        expect(json[i]['class_date_name']['name']).to eq classes[i].event.name
+        expect(json[i]['class_date']['event_id']).to eq classes[i].event.id
       end
     end
 

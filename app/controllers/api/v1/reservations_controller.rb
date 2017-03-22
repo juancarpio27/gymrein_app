@@ -6,7 +6,7 @@ class Api::V1::ReservationsController < Api::ApiController
   def find_by_date
     date = Date.parse(params[:date])
     @reservations = @api_key.user.reservations.joins(:class_date).where(class_dates: {date: date.midnight..date.end_of_day})
-    render json: @reservations.as_json(methods: [:class_date_name, :class_date_logo, :class_date])
+    render json: @reservations.as_json(Reservation::Json::LIST)
   end
 
   #POST /api/v1/reservations/:id/check_in
@@ -33,7 +33,7 @@ class Api::V1::ReservationsController < Api::ApiController
       if @reservation.save
         @reservation.user.update_classes(-1)
         @reservation.class_date.new_class
-        render json: {success: true, reservation: @reservation.as_json}
+        render json: {success: true, reservation: @reservation.as_json(Reservation::Json::SHOW)}
       else
         render json: {errors: @reservation.errors.full_messages }, status: 422
       end

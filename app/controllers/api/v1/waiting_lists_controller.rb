@@ -11,7 +11,7 @@ class Api::V1::WaitingListsController < Api::ApiController
       render json: {success: false, error: 'No available classes'}
     else
       if @waiting_list.save
-        render json:{success: true, waiting_list: @waiting_list.as_json(methods: [:event])}
+        render json:{success: true, waiting_list: @waiting_list.as_json(WaitingList::Json::SHOW)}
       else
         render json: {errors: @waiting_list.errors.full_messages }, status: 422
       end
@@ -22,13 +22,13 @@ class Api::V1::WaitingListsController < Api::ApiController
   #GET /api/v1/waiting_lists
   def index
     @waiting_lists = @api_key.user.waiting_lists
-    render json: @waiting_lists.as_json(methods: [:event])
+    render json: @waiting_lists.as_json(WaitingList::Json::LIST)
   end
 
   #GET /api/v1/waiting_lists/:id
   def show
     @waiting_list = @api_key.user.waiting_lists.find(params[:id])
-    render json: @waiting_list.as_json(methods: [:event])
+    render json: @waiting_list.as_json(WaitingList::Json::SHOW)
   end
 
   #DELETE /api/v1/waiting_lists/:id

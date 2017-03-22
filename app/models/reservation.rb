@@ -3,6 +3,25 @@ class Reservation < ApplicationRecord
   belongs_to :user
   belongs_to :class_date
 
+  module Json
+
+    SHOW = {
+        include: {
+            class_date: {
+                methods: [:logo_url, :event, :location]
+            }
+        }
+    }
+
+    LIST = {
+        include: {
+            class_date: {
+                methods: [:logo_url, :event, :location]
+            }
+        }
+    }
+  end
+
   def class_date_name
     self.class_date.event
   end
@@ -14,6 +33,10 @@ class Reservation < ApplicationRecord
   def check_in
     self.assisted = true
     self.save!
+  end
+
+  def event
+    self.class_date.event
   end
 
 end

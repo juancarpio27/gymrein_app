@@ -5,14 +5,14 @@ class Api::V1::ClassDatesController < Api::ApiController
   #GET api/v1/class_dates/:id
   def show
     @class = ClassDate.find(params[:id])
-    render json: @class.as_json(methods: [:event, :location, :instructor])
+    render json: @class.as_json(ClassDate::Json::SHOW)
   end
 
   #POST api/v1/class_dates/find_by_date
   def find_by_date
     date = Date.parse(params[:date])
     @classes = ClassDate.where(date: date.midnight..date.end_of_day)
-    render json: @classes.as_json(methods: [:event])
+    render json: @classes.as_json(ClassDate::Json::LIST)
   end
 
 end
