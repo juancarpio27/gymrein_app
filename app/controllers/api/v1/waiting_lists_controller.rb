@@ -7,6 +7,8 @@ class Api::V1::WaitingListsController < Api::ApiController
     @waiting_list = @api_key.user.waiting_lists.build(waiting_list_params)
     if @waiting_list.user.has_existing_class(@waiting_list.class_date.date,@waiting_list.class_date.duration)
       render json: {success: false, error: 'Already have a scheduled class'}
+    elsif @waiting_list.user.available_classes == 0
+      render json: {success: false, error: 'No available classes'}
     else
       if @waiting_list.save
         render json:{success: true, waiting_list: @waiting_list.as_json(methods: [:event])}

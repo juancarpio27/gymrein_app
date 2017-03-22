@@ -18,4 +18,9 @@ class ClassDate < ApplicationRecord
     self.save!
   end
 
+  def recover_class
+    self.available = self.available + 1
+    self.save!
+  end
+
 end

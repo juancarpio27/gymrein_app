@@ -1,6 +1,6 @@
 class Api::V1::UsersController < Api::ApiController
 
-  before_action :assert_user, only: [:update]
+  before_action :assert_user, only: [:update, :show]
 
   #POST /api/v1/users
   def create
@@ -52,6 +52,12 @@ class Api::V1::UsersController < Api::ApiController
     else
       render json: {success: false, error: 'Mail does not exists'}
     end
+  end
+
+  #GET /api/v1/users/:id
+  def show
+    user = User.find(params[:id])
+    render json: @user.as_json(@user.class::Json::SHOW)
   end
 
   protected

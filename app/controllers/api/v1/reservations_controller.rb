@@ -27,14 +27,44 @@ class Api::V1::ReservationsController < Api::ApiController
       render json: {success: false, error: 'Class is full'}
     elsif @reservation.user.has_existing_class(@reservation.class_date.date,@reservation.class_date.duration)
       render json: {success: false, error: 'Already have a scheduled class'}
+    elsif @reservation.user.available_classes == 0
+      render json: {success: false, error: 'No available classes'}
     else
       if @reservation.save
+        @reservation.user.update_classes(-1)
         @reservation.class_date.new_class
         render json: {success: true, reservation: @reservation.as_json}
       else
         render json: {errors: @reservation.errors.full_messages }, status: 422
       end
     end
+  end
+
+  #DELETE /api/vi/reservations/:id
+  def destroy
+    @reservation = @api_key.user.reservations.find(params[:id])
+    minutes = ((@reservation.class_date.date - Time.now.in_time_zone('Mexico City'))/60).to_i
+    if minutes < 0
+      render json: {success: false, error: 'Class is already done'}
+    elsif minutes >= 0 and minutes < 90
+      render json: {success: false, error: 'Can not cancel 90 minutes before class'}
+    else
+      if @reservation.destroy
+        if @reservation.class_date.waiting_lists.count > 0
+          waiting = @reservation.class_date.waiting_lists.order(:created_at).first
+          @reservation.class_date.reservations.create(user: waiting.user)
+          waiting.user.update_classes(-1)
+          #TODO send notification to user
+          waiting.destroy
+        else
+          @reservation.class_date.recover_class
+        end
+        render json: {success: true}
+      else
+        render json: {success: false, error: 'Something bad happened'}
+      end
+    end
+
   end
 
   protected

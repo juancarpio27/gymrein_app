@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       constraints(format: 'json') do
 
-        resource :users, only: [:create, :update] do
+        resource :users, only: [:create, :update, :show] do
           collection {
             post 'validate'
             post 'send_password_recovery'
@@ -46,7 +46,7 @@ Rails.application.routes.draw do
           }
         end
 
-        resources :reservations, only: [:create] do
+        resources :reservations, only: [:create, :destroy] do
           collection {
             post 'find_by_date'
           }

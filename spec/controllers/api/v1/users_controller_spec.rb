@@ -199,4 +199,20 @@ RSpec.describe Api::V1::UsersController, type: :controller do
   end
 
 
+  describe "shows user" do
+    before :each do
+      @api_key = FactoryGirl.create(:api_key)
+      request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(@api_key.access_token)
+    end
+    it "shows user" do
+      get :show, id: @api_key.user.id
+      expect(response.status).to eq 200
+      json = JSON.parse(response.body)
+      expect(json['id']).to eq @api_key.user.id
+
+    end
+  end
+
+
+
 end

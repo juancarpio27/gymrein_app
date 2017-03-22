@@ -4,7 +4,8 @@ RSpec.describe Api::V1::WaitingListsController, type: :controller do
 
   describe "add to waiting list" do
     before :each do
-      @api_key = FactoryGirl.create(:api_key)
+      @user = FactoryGirl.create(:user, available_classes: 10)
+      @api_key = FactoryGirl.create(:api_key, user: @user)
       @spinning = FactoryGirl.create(:class_date,  date: '01-04-2017 14:00', duration: 60)
       request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(@api_key.access_token)
     end
@@ -13,8 +14,9 @@ RSpec.describe Api::V1::WaitingListsController, type: :controller do
       post :create, waiting_list: {class_date_id: @spinning.id}
       expect(response).to be_success
       json = JSON.parse(response.body)
-      expect(json['waiting_list']['class_date_id']).to eq @spinning.id
       expect(json['success']).to eq true
+      expect(json['waiting_list']['class_date_id']).to eq @spinning.id
+
     end
 
     it "returns error with overlapping class" do
