@@ -49,12 +49,17 @@ Rails.application.routes.draw do
         resources :reservations, only: [:create, :destroy] do
           collection {
             post 'find_by_date'
+            get 'future'
           }
           member do
             post 'check_in'
           end
         end
-        resources :waiting_lists, only: [:create, :index, :show, :destroy]
+        resources :waiting_lists, only: [:create, :index, :show, :destroy] do
+          collection {
+            get 'future'
+          }
+        end
 
       end
     end

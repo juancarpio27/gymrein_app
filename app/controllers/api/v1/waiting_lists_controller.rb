@@ -16,7 +16,6 @@ class Api::V1::WaitingListsController < Api::ApiController
         render json: {errors: @waiting_list.errors.full_messages }, status: 422
       end
     end
-
   end
 
   #GET /api/v1/waiting_lists
@@ -39,6 +38,12 @@ class Api::V1::WaitingListsController < Api::ApiController
     else
       render json: {success: false}
     end
+  end
+
+  #GET api/v1/wiaiting_lists/future
+  def future
+    @waiting_list = @api_key.user.waiting_lists.joins(:class_date).where('class_dates.date > ?',Time.now.in_time_zone('Mexico City'))
+    render json: @waiting_list.as_json(WaitingList::Json::LIST)
   end
 
   protected

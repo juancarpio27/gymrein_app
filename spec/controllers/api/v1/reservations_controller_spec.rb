@@ -8,24 +8,37 @@ RSpec.describe Api::V1::ReservationsController, type: :controller do
     @spinning = FactoryGirl.create(:class_date, date: '01-01-2017 10:00')
     @crossfit = FactoryGirl.create(:class_date, date: '01-01-2017 14:00')
     @running = FactoryGirl.create(:class_date, date: '01-02-2017 14:00')
+    @future = FactoryGirl.create(:class_date,date: Time.now.in_time_zone('Mexico City') + 6.hours)
 
     @reservation_1 = FactoryGirl.create(:reservation, user: @api_key.user, class_date: @spinning)
     @reservation_2 = FactoryGirl.create(:reservation, user: @api_key.user, class_date: @crossfit)
     @reservation_3 = FactoryGirl.create(:reservation, user: @api_key.user, class_date: @running)
+    @reservation_4 = FactoryGirl.create(:reservation, user: @api_key.user, class_date: @future)
 
     request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(@api_key.access_token)
   end
 
   describe "get classes by date" do
+
+
+    it "get future classes" do
+      get :future
+      expect(response).to be_success
+      json = JSON.parse(response.body)
+      expect(json.count).to eq 1
+      expect(json[0]['id']).to eq @reservation_4.id
+    end
+
+
     it "get empty classes by empty date" do
-      post :find_by_date, date: '01-03-2017'
+      post :find_by_date, date: '2017-03-01 10:00:00 +0000'
       expect(response).to be_success
       json = JSON.parse(response.body)
       expect(json.count).to eq 0
     end
 
     it "get multiple classes for a date" do
-      post :find_by_date, date: '01-01-2017'
+      post :find_by_date, date: '2017-01-01 10:00:00 +0000'
       expect(response).to be_success
       json = JSON.parse(response.body)
       expect(json.count).to eq 2
@@ -36,7 +49,7 @@ RSpec.describe Api::V1::ReservationsController, type: :controller do
     end
 
     it "get one class for a date" do
-      post :find_by_date, date: '01-02-2017'
+      post :find_by_date, date: '2017-02-01 10:00:00 +0000'
       expect(response).to be_success
       json = JSON.parse(response.body)
       expect(json.count).to eq 1

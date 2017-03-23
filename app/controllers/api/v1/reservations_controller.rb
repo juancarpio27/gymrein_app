@@ -9,6 +9,12 @@ class Api::V1::ReservationsController < Api::ApiController
     render json: @reservations.as_json(Reservation::Json::LIST)
   end
 
+  #GET api/v1/reservations/future
+  def future
+    @reservations = @api_key.user.reservations.joins(:class_date).where('class_dates.date > ?',Time.now.in_time_zone('Mexico City'))
+    render json: @reservations.as_json(Reservation::Json::LIST)
+  end
+
   #POST /api/v1/reservations/:id/check_in
   def check_in
     @reservation = @api_key.user.reservations.find(params[:id])

@@ -34,11 +34,23 @@ RSpec.describe Api::V1::WaitingListsController, type: :controller do
       @api_key = FactoryGirl.create(:api_key)
       @spinning = FactoryGirl.create(:class_date)
       @boxing = FactoryGirl.create(:class_date)
+      @future = FactoryGirl.create(:class_date,date: Time.now.in_time_zone('Mexico City') + 6.hours)
+
 
       @waiting_spinning = FactoryGirl.create(:waiting_list, user: @api_key.user, class_date: @spinning)
       @waiting_boxing = FactoryGirl.create(:waiting_list, user: @api_key.user, class_date: @boxing)
+      @waiting_future = FactoryGirl.create(:waiting_list, user: @api_key.user, class_date: @future)
+
 
       request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(@api_key.access_token)
+    end
+
+    it "show future classes" do
+      get :future
+      expect(response).to be_success
+      json = JSON.parse(response.body)
+      expect(json.count).to eq 1
+      expect(json[0]['id']).to eq @waiting_future.id
     end
 
     it "index all waiting list" do
@@ -59,11 +71,11 @@ RSpec.describe Api::V1::WaitingListsController, type: :controller do
 
     end
     it "destroy waiting lists" do
-      expect(@api_key.user.waiting_lists.count).to eq 2
+      expect(@api_key.user.waiting_lists.count).to eq 3
       delete :destroy, id: @waiting_spinning.id
       expect(response).to be_success
       json = JSON.parse(response.body)
-      expect(@api_key.user.reload.waiting_lists.count).to eq 1
+      expect(@api_key.user.reload.waiting_lists.count).to eq 2
     end
   end
 
