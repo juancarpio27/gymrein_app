@@ -10,7 +10,15 @@ class Api::V1::SessionsController < Api::ApiController
     else
       render json: {success: false}
     end
+  end
 
+  def destroy
+    session = @api_key.user.sessions.active.last
+    if session.delete!
+      {success: true}
+    else
+      {success: false}
+    end
   end
 
 
