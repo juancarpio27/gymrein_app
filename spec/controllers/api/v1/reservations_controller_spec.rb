@@ -85,13 +85,12 @@ RSpec.describe Api::V1::ReservationsController, type: :controller do
   describe "create reservation" do
     it "successfully creates reservation" do
       classes = @api_key.user.available_classes
-      @boxing = FactoryGirl.create(:class_date, date: '01-04-2017 14:00')
-      spaces = @boxing.available
+      @boxing = FactoryGirl.create(:class_date, date: '01-04-2017 14:00', limit: 40)
       post :create, reservation: {class_date_id: @boxing.id}
       expect(response).to be_success
       json = JSON.parse(response.body)
       expect(json['success']).to eq true
-      expect(@boxing.reload.available).to eq spaces - 1
+      expect(@boxing.reload.available).to eq 39
       expect(json['reservation']['class_date_id']).to eq @boxing.id
       expect(json['reservation']['user_id']).to eq @api_key.user.id
       expect(json['reservation']['assisted']).to eq false
@@ -110,7 +109,7 @@ RSpec.describe Api::V1::ReservationsController, type: :controller do
     end
 
     it "returns error when class is full" do
-      boxing = FactoryGirl.create(:class_date, available: 0)
+      boxing = FactoryGirl.create(:class_date, limit: 0)
       post :create, reservation: {class_date_id: boxing.id}
       expect(response).to be_success
       json = JSON.parse(response.body)
@@ -155,8 +154,10 @@ RSpec.describe Api::V1::ReservationsController, type: :controller do
     end
 
     it "cancels class with no waiting list" do
-      boxing = FactoryGirl.create(:class_date, date: '01-01-2018')
+      boxing = FactoryGirl.create(:class_date, date: '01-01-2018', limit: 40)
       reservation = FactoryGirl.create(:reservation, user: @api_key.user, class_date: boxing)
+      boxing.available = 39
+      boxing.save!
       available = boxing.available
       expect(boxing.waiting_lists.count).to eq 0
       delete :destroy, id: reservation.id

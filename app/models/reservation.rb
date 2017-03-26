@@ -3,6 +3,10 @@ class Reservation < ApplicationRecord
   belongs_to :user
   belongs_to :class_date
 
+  scope :checked_in, -> {where(assisted: true)}
+
+  self.per_page = 20
+
   module Json
 
     SHOW = {

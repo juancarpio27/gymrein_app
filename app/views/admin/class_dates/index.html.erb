@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-md-2">
+    <%= image_tag @event.logo.url(:thumb) %>
+  </div>
+  <div class="col-md-10">
+    <h3><%= @event.name %></h3>
+  </div>
+</div>
+
+<h1>Horarios</h1>
+
+<p>Existen <%= @class_dates.count %> horarios para esta clase</p>
+<p>Clases ya empezadas: <%= @class_dates.past.count %> Clases futuras: <%= @class_dates.future.count %></p>
+
+<table class="table">
+  <% @class_dates.each do |class_date| %>
+      <% if class_date.past_class %>
+          <tr class="bg-warning">
+            <td><%= class_date.location.name %></td>
+            <td><%= class_date.date %></td>
+            <td><%= link_to "Detalles", admin_event_class_date_path(@event, class_date) %></td>
+          </tr>
+      <% else %>
+          <tr class="bg-success">
+            <td><%= class_date.location.name %></td>
+            <td><%= class_date.date %></td>
+            <td><%= link_to "Detalles", admin_event_class_date_path(@event, class_date) %></td>
+          </tr>
+      <% end %>
+  <% end %>
+</table>
+
+<%= will_paginate @class_dates, renderer: BootstrapPagination::Rails %>
+
+<%= link_to "Agregar horario", new_admin_event_class_date_url %>

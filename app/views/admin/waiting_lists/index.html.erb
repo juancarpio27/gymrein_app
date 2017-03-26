@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-md-2">
+    <%= image_tag @class_date.event.logo.url(:thumb) %>
+  </div>
+  <div class="col-md-10">
+    <h3><%= @class_date.event.name %></h3>
+  </div>
+</div>
+
+<h4>Id: <%= @class_date.id %></h4>
+<h4>Horario: <%= @class_date.date %></h4>
+<h4>Ubicación: <%= @class_date.location.name %></h4>
+
+<p>Existen <%= @waiting_lists.count %> usuarios en lista de espera </p>
+
+<table class="table">
+  <% @waiting_lists.each do |waiting_list| %>
+      <tr>
+        <td><%= waiting_list.user.full_name %></td>
+      </tr>
+  <% end %>
+</table>

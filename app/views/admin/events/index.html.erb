@@ -5,6 +5,7 @@
       <tr>
         <td><%= event.name %></td>
         <td><%= link_to "Detalles", admin_event_path(event) %></td>
+        <td><%= link_to "Horarios", admin_event_class_dates_path(event) %></td>
         <td><%= link_to "Editar", edit_admin_event_path(event) %></td>
         <td><%= link_to "Borrar", admin_event_path(event), method: :delete %></td>
       </tr>

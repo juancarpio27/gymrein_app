@@ -1,5 +1,9 @@
 class ClassDate < ApplicationRecord
 
+  self.per_page = 20
+
+  attr_accessor :repeat, :repeat_type
+
   belongs_to :instructor
   belongs_to :location
   belongs_to :event
@@ -7,7 +11,11 @@ class ClassDate < ApplicationRecord
   has_many :reservations
   has_many :waiting_lists
 
-  before_save :calculate_finish
+  before_create :calculate_finish
+  before_create :set_available
+
+  scope :future, -> {where('date > ?',Time.now - 6.hours)}
+  scope :past, -> {where('date < ?',Time.now - 6.hours)}
 
   module Json
 
@@ -41,7 +49,15 @@ class ClassDate < ApplicationRecord
   end
 
   def calculate_finish
-    self.finish = self.date + self.duration.minutes
+    if self.date
+      self.finish = self.date + self.duration.minutes
+    else
+      nil
+    end
+  end
+
+  def set_available
+    self.available = self.limit
   end
 
   def logo_url
@@ -56,6 +72,10 @@ class ClassDate < ApplicationRecord
   def recover_class
     self.available = self.available + 1
     self.save!
+  end
+
+  def past_class
+    date < Time.now - 6.hours
   end
 
 end

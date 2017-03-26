@@ -77,7 +77,12 @@ Rails.application.routes.draw do
     resources :users
     resources :instructors
     resources :locations
-    resources :events
+    resources :events do
+      resources :class_dates do
+        resources :reservations, only: [:index]
+        resources :waiting_lists, only: [:index]
+      end
+    end
     resources :packages
     resources :promotions
   end

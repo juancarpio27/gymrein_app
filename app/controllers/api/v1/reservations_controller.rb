@@ -39,6 +39,8 @@ class Api::V1::ReservationsController < Api::ApiController
       if @reservation.save
         @reservation.user.update_classes(-1)
         @reservation.class_date.new_class
+        puts("NUMBER OF CLASSSESS!!!!!!")
+        puts(@reservation.class_date.available)
         render json: {success: true, reservation: @reservation.as_json(Reservation::Json::SHOW)}
       else
         render json: {errors: @reservation.errors.full_messages }, status: 422

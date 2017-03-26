@@ -1,0 +1,61 @@
+<h1>Horario: </h1>
+
+<div class="row">
+  <div class="col-md-2">
+    <%= image_tag @event.logo.url(:thumb) %>
+  </div>
+  <div class="col-md-10">
+    <h3><%= @event.name %> id: <%= @class_date.id %></h3>
+  </div>
+</div>
+
+<div class="row">
+  <table class="table table-striped">
+    <tr>
+      <td>Hora inicio</td>
+      <td><%= @class_date.date %></td>
+    </tr>
+    <tr>
+      <td>Duración (minutos)</td>
+      <td><%= @class_date.duration %></td>
+    </tr>
+    <tr>
+      <td>Hora fin</td>
+      <td><%= @class_date.finish %></td>
+    </tr>
+    <tr>
+      <td>Disponibilidad</td>
+      <td><%= @class_date.available %> / <%= @class_date.limit %></td>
+    </tr>
+    <tr>
+      <td>Sede</td>
+      <td><%= @class_date.location.name %></td>
+    </tr>
+    <tr>
+      <td>Instructor</td>
+      <td><%= @class_date.instructor.full_name %></td>
+    </tr>
+    <% if @class_date.past_class %>
+        <tr>
+          <td>Check in</td>
+          <td><%= @class_date.reservations.checked_in.count %>/<%= @class_date.reservations.count %></td>
+        </tr>
+    <% else %>
+        <tr>
+          <td>Lista de espera</td>
+          <td><%= @class_date.waiting_lists.count %></td>
+        </tr>
+    <% end %>
+  </table>
+</div>
+
+<% if @class_date.available < @class_date.limit %>
+    <%= link_to "Reservaciones", admin_event_class_date_reservations_path(@event,@class_date) %>
+<% end %>
+
+
+<% if @class_date.available == 0 %>
+    <%= link_to "Lista de espera", admin_event_class_date_waiting_lists_path(@event,@class_date) %>
+<% end %>
+
+<%= link_to "Horarios", admin_event_class_dates_url(@event) %>

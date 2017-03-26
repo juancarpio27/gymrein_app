@@ -3,6 +3,8 @@ class WaitingList < ApplicationRecord
   belongs_to :user
   belongs_to :class_date
 
+  self.per_page = 20
+
   module Json
 
     SHOW = {

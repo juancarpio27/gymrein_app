@@ -35,6 +35,8 @@ class User < ApplicationRecord
   has_many :class_dates, through: :reservations
   has_many :class_waiting, through: :waiting_lists, source: :class_date
 
+  scope :search_by_email,->(email){ where("name || ' ' || lastname LIKE ?", "%#{email}%")}
+
   self.per_page = 20
 
   def access_token

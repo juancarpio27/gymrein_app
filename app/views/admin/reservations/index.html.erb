@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-2">
+    <%= image_tag @class_date.event.logo.url(:thumb) %>
+  </div>
+  <div class="col-md-10">
+    <h3><%= @class_date.event.name %></h3>
+  </div>
+</div>
+
+<h4>Id: <%= @class_date.id %></h4>
+<h4>Horario: <%= @class_date.date %></h4>
+<h4>Ubicación: <%= @class_date.location.name %></h4>
+
+<p>Existen <%= @reservations.count %> reserva(s) para esta clase </p>
+
+<table class="table">
+  <% @reservations.each do |reservation| %>
+      <tr>
+        <td><%= reservation.user.full_name %></td>
+        <% if reservation.assisted %>
+            <td class="bg-success">Check-in</td>
+        <% else %>
+            <td class="bg-danger">No hizo check-in</td>
+        <% end %>
+      </tr>
+  <% end %>
+</table>
