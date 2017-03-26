@@ -2,7 +2,7 @@ class Admin::UsersController < AdminController
   before_action :authenticate
 
   def index
-    @users = User.search_by_email(params[:search]).paginate(:page => params[:page])
+    @users = User.find_by_fullname(params[:search]).paginate(:page => params[:page])
   end
 
   def new

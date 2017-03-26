@@ -35,7 +35,7 @@ class User < ApplicationRecord
   has_many :class_dates, through: :reservations
   has_many :class_waiting, through: :waiting_lists, source: :class_date
 
-  scope :search_by_email,->(email){ where("name || ' ' || lastname LIKE ?", "%#{email}%")}
+  scope :find_by_fullname,->(name){ where("LOWER(name || ' ' || lastname) LIKE ?", "%#{name}%")}
 
   self.per_page = 20
 
