@@ -9,11 +9,13 @@
   <tr>
     <th>Usuario</th>
     <th>Fecha de compra</th>
+    <th>Precio pagado</th>
   </tr>
   <% @user_packages.each do |user_package| %>
       <tr>
         <td><%= user_package.user.full_name %></td>
         <td><%= user_package.created_at %></td>
+        <td><%= user_package.price %></td>
       </tr>
   <% end %>
 </table>

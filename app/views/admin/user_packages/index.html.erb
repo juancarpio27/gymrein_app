@@ -12,10 +12,14 @@
 <p>Existen <%= @user.user_packages.count %> paquete(s) comprados para este usuario </p>
 
 <table class="table">
+  <tr>
+    <th>Nombre</th>
+    <th>Precio pagado</th>
+  </tr>
   <% @user_packages.each do |user_package| %>
     <tr>
       <td><%= user_package.package.name %></td>
-      <td><%= user_package.package.price %></td>
+      <td><%= user_package.price %></td>
     </tr>
   <% end %>
 </table>
