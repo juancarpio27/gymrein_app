@@ -38,10 +38,17 @@
   <tr>
     <td>Clases reservadas</td>
     <td><%= @user.future_reservations.count %></td>
+    <td><%= link_to "Reservas", admin_user_reservations_path(@user) %></td>
   </tr>
   <tr>
     <td>Clases en lista de espera</td>
     <td><%= @user.future_waiting_lists.count %></td>
+    <td><%= link_to "Lista de espera", admin_user_waiting_lists_path(@user) %></td>
+  </tr>
+  <tr>
+    <td>Paquetes comprados</td>
+    <td><%= @user.user_packages.count %></td>
+    <td><%= link_to "Historial", admin_user_user_packages_path(@user) %></td>
   </tr>
 </table>
 

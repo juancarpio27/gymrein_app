@@ -23,4 +23,9 @@ class Instructor < ApplicationRecord
   def avatar_url
     self.avatar.url
   end
+
+  def future_classes
+    self.class_dates.where('date > ?', Time.now - 6.hours)
+  end
+
 end

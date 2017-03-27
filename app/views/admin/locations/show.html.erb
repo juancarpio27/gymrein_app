@@ -2,12 +2,31 @@
 
 <table class="table table-striped">
   <tr>
-    <td><%=@location.id %></td>
-    <td><%=@location.name %></td>
-    <td><%=@location.address %></td>
-    <td><%=@location.opening_hour %></td>
-    <td><%=@location.closing_hour %></td>
+    <td>Id</td>
+    <td><%= @location.id %></td>
   </tr>
+  <tr>
+    <td>Nombre</td>
+    <td><%= @location.name %></td>
+  </tr>
+  <tr>
+    <td>Dirección</td>
+    <td><%= @location.address %></td>
+  </tr>
+  <tr>
+    <td>Hora apertura</td>
+    <td><%= @location.opening_hour %></td>
+  </tr>
+  <tr>
+    <td>Hora cierre</td>
+    <td><%= @location.closing_hour %></td>
+  </tr>
+  <tr>
+    <td>Clases futuras</td>
+    <td><%= @location.future_classes.count %></td>
+    <td><%= link_to "Ver clases", admin_location_class_dates_path(@location) %></td>
+  </tr>
+
 </table>
 
 

@@ -1,21 +1,30 @@
-<h2>Detalles</h2>
+<div class="row">
+    <h2>Detalles</h2>
+</div>
 
 <div class="row">
-
   <h3>ID paquete: <%= @package.id %></h3>
-
 </div>
 <br>
 <table class="table table-striped">
   <tr>
+    <td>Nombre</td>
     <td><%= @package.name %></td>
+  </tr>
+  <tr>
+    <td>Precio</td>
     <td><%= @package.price %></td>
+  </tr>
+  <tr>
+    <td>Clases</td>
     <td><%= @package.classes %></td>
   </tr>
+  <tr>
+    <td>Número de compras</td>
+    <td><%= @package.user_packages.count %></td>
+    <td><%= link_to "Historial", admin_package_user_packages_path(@package) %></td>
+  </tr>
 </table>
-
-
-
 
 <%= link_to "Editar", edit_admin_package_path(@package) %>
 <%= link_to "Regresar", admin_packages_path %>

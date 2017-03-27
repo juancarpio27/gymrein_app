@@ -1,0 +1,23 @@
+<div class="row">
+    <h3>Paquete: <%= @package.name %></h3>
+    <h3>ID paquete: <%= @package.id %></h3>
+</div>
+
+<p>Existen <%= @user_packages.count %> paquete(s) comprados</p>
+
+<table class="table">
+  <tr>
+    <th>Usuario</th>
+    <th>Fecha de compra</th>
+  </tr>
+  <% @user_packages.each do |user_package| %>
+      <tr>
+        <td><%= user_package.user.full_name %></td>
+        <td><%= user_package.created_at %></td>
+      </tr>
+  <% end %>
+</table>
+
+<%= will_paginate @user_packages, renderer: BootstrapPagination::Rails %>
+
+<%= link_to "Regresar", admin_package_path(@package) %>

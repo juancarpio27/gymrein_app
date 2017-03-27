@@ -1,0 +1,21 @@
+<div class="row">
+  <h3><%= @location.name %></h3>
+</div>
+
+<h4>Id: <%= @location.id %></h4>
+
+<p>Existen <%= @class_dates.count %> clase(s) pendiente(s) para esta sucursal</p>
+
+<table class="table">
+  <% @class_dates.each do |class_date| %>
+      <tr>
+        <td><%= class_date.event.name %></td>
+        <td><%= class_date.date %></td>
+      </tr>
+  <% end %>
+</table>
+
+<%= will_paginate @class_dates, renderer: BootstrapPagination::Rails %>
+
+
+<%= link_to "Regresar", admin_location_path(@location) %>

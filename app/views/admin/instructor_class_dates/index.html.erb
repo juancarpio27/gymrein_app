@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-md-2">
+    <%= image_tag @instructor.avatar.url(:thumb), size: "100" %>
+  </div>
+  <div class="col-md-10">
+    <h3><%= @instructor.full_name %></h3>
+  </div>
+</div>
+
+<h4>Id: <%= @instructor.id %></h4>
+
+<p>Existen <%= @class_dates.count %> clase(s) pendiente(s) para el instructor</p>
+
+<table class="table">
+  <% @class_dates.each do |class_date| %>
+      <tr>
+        <td><%= class_date.event.name %></td>
+        <td><%= class_date.date %></td>
+      </tr>
+  <% end %>
+</table>
+
+<%= will_paginate @class_dates, renderer: BootstrapPagination::Rails %>
+
+
+<%= link_to "Regresar", admin_instructor_path(@instructor) %>

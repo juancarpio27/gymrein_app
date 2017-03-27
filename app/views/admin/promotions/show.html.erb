@@ -1,22 +1,30 @@
-<h2>Detalles</h2>
+<div class="row">
+    <h2>Detalles</h2>
+</div>
 
 <div class="row">
-
   <h3>ID promoción: <%= @promotion.id %></h3>
-
 </div>
+
 <br>
 <table class="table table-striped">
   <tr>
+    <td>Código</td>
     <td><%= @promotion.code %></td>
+  </tr>
+  <tr>
+    <td>Tipo</td>
     <td><%= @promotion.promotion_type %></td>
+  </tr>
+  <tr>
+    <td>Fecha de expiración</td>
     <td><%= @promotion.expiration %></td>
+  </tr>
+  <tr>
+    <td>Cantidad</td>
     <td><%= @promotion.amount %></td>
   </tr>
 </table>
-
-
-
 
 <%= link_to "Editar", edit_admin_promotion_path(@promotion) %>
 <%= link_to "Regresar", admin_promotions_path %>

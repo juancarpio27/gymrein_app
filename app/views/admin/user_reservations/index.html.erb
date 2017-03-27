@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-md-2">
+    <%= image_tag @user.avatar.url(:thumb), size: "100" %>
+  </div>
+  <div class="col-md-10">
+    <h3><%= @user.full_name %></h3>
+  </div>
+</div>
+
+<h4>Id: <%= @user.id %></h4>
+
+<p>Existen <%= @user.future_reservations.count %> reserva(s) futuras para este usuario </p>
+<p>Existen <%= @reservations.count %> reserva(s) totales para este usuario</p>
+
+<table class="table">
+  <% @reservations.each do |reservation| %>
+        <% if reservation.class_date.date > Time.now - 6.hours %>
+          <tr class="bg-warning">
+            <td><%= reservation.class_date.event.name %></td>
+            <td><%= reservation.class_date.date %></td>
+          </tr>
+        <% elsif reservation.assisted %>
+          <tr class="bg-success">
+            <td><%= reservation.class_date.event.name %></td>
+            <td><%= reservation.class_date.date %></td>
+          </tr>
+        <% else %>
+          <tr class="bg-danger">
+            <td><%= reservation.class_date.event.name %></td>
+            <td><%= reservation.class_date.date %></td>
+          </tr>
+        <% end %>
+  <% end %>
+</table>
+
+<%= will_paginate @reservations, renderer: BootstrapPagination::Rails %>
+
+
+<%= link_to "Regresar", admin_user_path(@user) %>

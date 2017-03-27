@@ -74,16 +74,26 @@ Rails.application.routes.draw do
 
     resources :admins
     resources :sessions
-    resources :users
-    resources :instructors
-    resources :locations
+    resources :users do
+      resources :reservations, controller: 'user_reservations', only: [:index]
+      resources :waiting_lists, controller: 'user_waiting_lists', only: [:index]
+      resources :user_packages, only: [:index]
+    end
+    resources :instructors do
+      resources :class_dates, controller: 'instructor_class_dates', only: [:index]
+    end
+    resources :locations do
+      resources :class_dates, controller: 'location_class_dates', only: [:index]
+    end
     resources :events do
       resources :class_dates do
         resources :reservations, only: [:index]
         resources :waiting_lists, only: [:index]
       end
     end
-    resources :packages
+    resources :packages do
+      resources :user_packages, controller: 'history_packages', only: [:index]
+    end
     resources :promotions
   end
 

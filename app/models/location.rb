@@ -4,6 +4,11 @@ class Location < ApplicationRecord
 
   scope :find_by_fullname,->(name){ where("LOWER(name) LIKE ?", "%#{name}%")}
 
-
   self.per_page = 20
+
+
+  def future_classes
+    self.class_dates.where('date > ?', Time.now - 6.hours)
+  end
+
 end

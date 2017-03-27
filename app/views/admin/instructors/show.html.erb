@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col-md-2">
-    <%= image_tag @instructor.avatar.url(:thumb) %>
+    <%= image_tag @instructor.avatar.url(:thumb), size: "100"  %>
   </div>
   <div class="col-md-9">
     <h3>ID instructor: <%= @instructor.id %></h3>
@@ -11,11 +11,18 @@
 <br>
 <table class="table table-striped">
   <tr>
+    <td>Nombre</td>
     <td><%=@instructor.full_name %></td>
+  </tr>
+  <tr>
+    <td>Clases futuras</td>
+    <td><%= @instructor.future_classes.count %></td>
+    <td><%= link_to "Ver clases", admin_instructor_class_dates_path(@instructor) %></td>
   </tr>
 </table>
 
 <div class="well">
+  <h4>Biografía</h4>
   <%= @instructor.biography %>
 </div>
 

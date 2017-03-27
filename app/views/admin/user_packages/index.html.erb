@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-md-2">
+    <%= image_tag @user.avatar.url(:thumb), size: "100" %>
+  </div>
+  <div class="col-md-10">
+    <h3><%= @user.full_name %></h3>
+  </div>
+</div>
+
+<h4>Id: <%= @user.id %></h4>
+
+<p>Existen <%= @user.user_packages.count %> paquete(s) comprados para este usuario </p>
+
+<table class="table">
+  <% @user_packages.each do |user_package| %>
+    <tr>
+      <td><%= user_package.package.name %></td>
+      <td><%= user_package.package.price %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= will_paginate @user_packages, renderer: BootstrapPagination::Rails %>
+
+
+<%= link_to "Regresar", admin_user_path(@user) %>

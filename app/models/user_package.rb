@@ -5,6 +5,9 @@ class UserPackage < ApplicationRecord
   belongs_to :card
   belongs_to :promotion, optional: true
 
+  self.per_page = 20
+
+
   def calculate_price
     if promotion.nil?
       package.price
