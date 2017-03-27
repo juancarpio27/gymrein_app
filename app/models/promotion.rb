@@ -7,6 +7,9 @@ class Promotion < ApplicationRecord
   validates :expiration, presence: true
   validates :amount, presence: true
 
+  scope :find_by_fullname,->(code){ where("code LIKE ?", "%#{code}%")}
+
+
   has_many :user_packages
 
   self.per_page = 20

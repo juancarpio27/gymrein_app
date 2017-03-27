@@ -15,7 +15,7 @@ class Admin::EventsController < AdminController
   end
 
   def index
-    @events = Event.paginate(:page => params[:page])
+    @events = Event.find_by_fullname(params[:search]).paginate(:page => params[:page])
   end
 
   def edit

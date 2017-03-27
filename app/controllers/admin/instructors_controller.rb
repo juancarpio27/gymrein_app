@@ -2,7 +2,7 @@ class Admin::InstructorsController < AdminController
   before_action :authenticate
 
   def index
-    @instructors = Instructor.paginate(:page => params[:page])
+    @instructors = Instructor.find_by_fullname(params[:search]).paginate(:page => params[:page])
   end
 
   def new

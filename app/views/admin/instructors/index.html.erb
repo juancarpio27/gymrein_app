@@ -1,5 +1,21 @@
 <h1>Instructores</h1>
 
+<%= form_tag admin_instructors_path, :method => 'get' do %>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+          <%= text_field_tag :search, params[:search],  {class: 'form-control', placeholder: "Buscar"}  %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <%= submit_tag "Search", class: "btn btn-primary"  %>
+      </div>
+    </div>
+<% end %><br>
+
+<p><%= @instructors.count %> instructor(es)</p>
+
 <table class="table table-striped">
   <% @instructors.each do |instructor| %>
       <tr>

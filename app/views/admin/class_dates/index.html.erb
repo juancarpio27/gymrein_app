@@ -9,6 +9,26 @@
 
 <h1>Horarios</h1>
 
+<%= form_tag admin_event_class_dates_path(@event), :method => 'get' do %>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+          <%= text_field_tag :beginning, params[:beginning],  {class: 'form-control', placeholder: "Inicio (dd-mm-aaaa)"}  %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+          <%= text_field_tag :end, params[:end],  {class: 'form-control', placeholder: "Fin (dd-mm-aaaa)"}  %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <%= submit_tag "Search", class: "btn btn-primary"  %>
+      </div>
+    </div>
+<% end %><br>
+
 <p>Existen <%= @class_dates.count %> horarios para esta clase</p>
 <p>Clases ya empezadas: <%= @class_dates.past.count %> Clases futuras: <%= @class_dates.future.count %></p>
 

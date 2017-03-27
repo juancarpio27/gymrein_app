@@ -39,6 +39,14 @@ class User < ApplicationRecord
 
   self.per_page = 20
 
+  def future_reservations
+    self.reservations.joins(:class_date).where('class_dates.date > ?', Time.now - 6.hours)
+  end
+
+  def future_waiting_lists
+    self.waiting_lists.joins(:class_date).where('class_dates.date > ?', Time.now - 6.hours)
+  end
+
   def access_token
     api_keys.first.nil? ? nil : api_keys.last.access_token
   end

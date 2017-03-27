@@ -3,7 +3,7 @@ class Admin::PromotionsController < AdminController
   before_action :authenticate
 
   def index
-    @promotions = Promotion.paginate(:page => params[:page])
+    @promotions = Promotion.find_by_fullname(params[:search]).paginate(:page => params[:page])
   end
 
   def new

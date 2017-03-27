@@ -6,6 +6,9 @@ class Package < ApplicationRecord
 
   has_many :user_packages
 
+  scope :find_by_fullname,->(name){ where("LOWER(name) LIKE ?", "%#{name}%")}
+
+
   self.per_page = 20
 
 end

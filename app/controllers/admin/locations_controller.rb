@@ -2,7 +2,7 @@ class Admin::LocationsController < AdminController
   before_action :authenticate
 
   def index
-    @locations = Location.paginate(:page => params[:page])
+    @locations = Location.find_by_fullname(params[:search]).paginate(:page => params[:page])
   end
 
   def new

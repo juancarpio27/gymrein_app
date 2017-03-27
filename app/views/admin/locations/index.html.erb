@@ -1,5 +1,21 @@
 <h1>Ubicaciones</h1>
 
+<%= form_tag admin_locations_path, :method => 'get' do %>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+          <%= text_field_tag :search, params[:search],  {class: 'form-control', placeholder: "Buscar"}  %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <%= submit_tag "Search", class: "btn btn-primary"  %>
+      </div>
+    </div>
+<% end %><br>
+
+<p><%= @locations.count %> ubicaciones</p>
+
 <table class="table table-striped">
   <% @locations.each do |location| %>
       <tr>

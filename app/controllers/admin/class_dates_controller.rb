@@ -7,7 +7,14 @@ class Admin::ClassDatesController < AdminController
   end
 
   def index
-    @class_dates = @event.class_dates.order('date DESC').paginate(:page => params[:page])
+    @class_dates = @event.class_dates
+    if params[:beginning].length > 0
+      @class_dates = @class_dates.where('date >= ?',Date.parse(params[:beginning]))
+    end
+    if params[:end].length > 0
+      @class_dates = @class_dates.where('date <= ?',Date.parse(params[:end]))
+    end
+    @class_dates = @class_dates.order('date DESC').paginate(:page => params[:page])
   end
 
   def show

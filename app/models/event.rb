@@ -10,6 +10,8 @@ class Event < ApplicationRecord
 
   has_many :class_dates
 
+  scope :find_by_fullname,->(name){ where("LOWER(name) LIKE ?", "%#{name}%")}
+
   def logo_url
     self.logo.url
   end

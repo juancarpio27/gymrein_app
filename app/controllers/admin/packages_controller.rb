@@ -3,7 +3,7 @@ class Admin::PackagesController < AdminController
   before_action :authenticate
 
   def index
-    @packages = Package.paginate(:page => params[:page])
+    @packages = Package.find_by_fullname(params[:search]).paginate(:page => params[:page])
   end
 
   def new

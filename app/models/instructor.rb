@@ -14,6 +14,8 @@ class Instructor < ApplicationRecord
 
   has_many :class_dates
 
+  scope :find_by_fullname,->(name){ where("LOWER(name || ' ' || lastname) LIKE ?", "%#{name}%")}
+
   def full_name
     name + ' ' + lastname
   end
