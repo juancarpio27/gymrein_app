@@ -7,6 +7,15 @@ class UserPackage < ApplicationRecord
 
   self.per_page = 20
 
+  module Json
+    SHOW = {
+        include: {
+            user: {
+                methods: [:access_token]
+            }
+        }
+    }
+  end
 
   def calculate_price
     if promotion.nil?

@@ -7,7 +7,7 @@ class Api::V1::UserPackagesController < Api::ApiController
     @user_package.price = @user_package.calculate_price
     if @user_package.save
       @api_key.user.update_classes(@user_package.package.classes)
-      render json: @user_package.as_json(methods: [:user])
+      render json: @user_package.as_json(UserPackage::Json::SHOW)
     else
       render json: {errors: @user_package.errors.full_messages }, status: 422
     end
