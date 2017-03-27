@@ -48,6 +48,7 @@ class Api::V1::UsersController < Api::ApiController
   def send_password_recovery
     user = User.find_by_email(params[:email])
     if user
+      user.send_reset_password_instructions
       render json: {success: true, message: 'Confirmation email sent'}
     else
       render json: {success: false, error: 'Mail does not exists'}
