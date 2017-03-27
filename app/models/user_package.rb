@@ -11,7 +11,7 @@ class UserPackage < ApplicationRecord
     SHOW = {
         include: {
             user: {
-                methods: [:access_token]
+                methods: [:access_token, :avatar_url]
             }
         }
     }
