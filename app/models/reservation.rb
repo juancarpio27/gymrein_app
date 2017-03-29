@@ -7,6 +7,8 @@ class Reservation < ApplicationRecord
 
   self.per_page = 20
 
+  before_destroy :return_class
+
   module Json
 
     SHOW = {
@@ -41,6 +43,12 @@ class Reservation < ApplicationRecord
 
   def event
     self.class_date.event
+  end
+
+  def return_class
+    if self.class_date.date > Time.now - 6.hours
+      self.user.update_classes(1)
+    end
   end
 
 end

@@ -1,0 +1,35 @@
+<h1>Editar clase</h1>
+
+<%= form_for [:admin, @event, @class_date] do |f| %>
+    <div class="form-group">
+      <%= f.text_field :date, {class: 'form-control', placeholder: "Hora de inicio (dd-mm-aaaa hh:mm)"} %>
+    </div>
+
+    <div class="form-group">
+      <%= f.number_field :duration, {class: 'form-control', placeholder: "Duración (minutos)"} %>
+    </div>
+
+    <div class="form-group">
+      <%= f.text_field :room, {class: 'form-control', placeholder: "Salón"} %>
+    </div>
+
+    <div class="form-group">
+      <%= f.number_field :limit, {class: 'form-control', placeholder: "Capacidad"} %>
+    </div>
+
+    <div class="form-group">
+      <label>Ubicación</label>
+      <%= f.select(:location_id, Location.all.collect {|a| [a.name, a.id]},{}, class: 'form-control')%>
+    </div>
+
+    <div class="form-group">
+      <label>Instructor</label>
+      <%= f.select(:instructor_id, Instructor.all.collect {|a| [a.full_name, a.id]},{}, class: 'form-control')%>
+    </div>
+
+    <%= f.submit "Agregar", class: 'btn btn-primary' %>
+<% end %>
+
+<br>
+
+<%= link_to "Horarios", admin_event_class_dates_url(@event) %>

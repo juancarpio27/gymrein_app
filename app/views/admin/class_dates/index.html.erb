@@ -39,12 +39,16 @@
             <td><%= class_date.location.name %></td>
             <td><%= class_date.date %></td>
             <td><%= link_to "Detalles", admin_event_class_date_path(@event, class_date) %></td>
+            <td><%= link_to "Editar", edit_admin_event_class_date_path(@event, class_date) %></td>
+            <td><%= link_to "Borrar", admin_event_class_date_path(@event, class_date), method: :delete %></td>
           </tr>
       <% else %>
           <tr class="bg-success">
             <td><%= class_date.location.name %></td>
             <td><%= class_date.date %></td>
             <td><%= link_to "Detalles", admin_event_class_date_path(@event, class_date) %></td>
+            <td><%= link_to "Editar", edit_admin_event_class_date_path(@event, class_date) %></td>
+            <td><%= link_to "Borrar", admin_event_class_date_path(@event, class_date), method: :delete %></td>
           </tr>
       <% end %>
   <% end %>

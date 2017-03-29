@@ -50,8 +50,31 @@ class Admin::ClassDatesController < AdminController
       end
       redirect_to admin_event_class_dates_path(@event)
     end
-
   end
+
+  def destroy
+    @class_date = @event.class_dates.find(params[:id])
+    if @class_date.destroy
+      redirect_to admin_event_class_dates_path(@event)
+    else
+      redirect_to admin_event_class_dates_path(@event)
+    end
+  end
+
+  def edit
+    @class_date = @event.class_dates.find(params[:id])
+  end
+
+  def update
+    @class_date = @event.class_dates.find(params[:id])
+    if @class_date.update(class_date_params)
+      redirect_to admin_event_class_dates_path(@event)
+    else
+      redirect_to edit_admin_event_class_date_path(@event,@class_date)
+    end
+  end
+
+
 
   protected
 

@@ -8,10 +8,10 @@ class ClassDate < ApplicationRecord
   belongs_to :location
   belongs_to :event
 
-  has_many :reservations
-  has_many :waiting_lists
+  has_many :reservations, dependent: :destroy
+  has_many :waiting_lists, dependent: :destroy
 
-  before_create :calculate_finish
+  before_save :calculate_finish
   before_create :set_available
 
   scope :future, -> {where('date > ?',Time.now - 6.hours)}
