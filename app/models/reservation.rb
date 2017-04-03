@@ -14,7 +14,7 @@ class Reservation < ApplicationRecord
     SHOW = {
         include: {
             class_date: {
-                methods: [:logo_url, :event, :location, :avatar_url]
+                methods: [:logo_url, :event, :location, :avatar_url, :instructor]
             }
         }
     }
@@ -22,7 +22,7 @@ class Reservation < ApplicationRecord
     LIST = {
         include: {
             class_date: {
-                methods: [:logo_url, :event, :location, :avatar_url]
+                methods: [:logo_url, :event, :location, :avatar_url, :instructor]
             }
         }
     }
