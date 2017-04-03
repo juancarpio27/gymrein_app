@@ -20,7 +20,9 @@ class ClassDate < ApplicationRecord
   module Json
 
     SHOW = {
+        methods: [:logo_url],
         include: {
+
             event: {
                 methods: [:logo_url]
             },
@@ -34,7 +36,9 @@ class ClassDate < ApplicationRecord
     }
 
     LIST = {
+        methods: [:logo_url],
         include: {
+
             event: {
                 methods: [:logo_url]
             },
