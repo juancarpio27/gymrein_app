@@ -1,7 +1,7 @@
 class User < ApplicationRecord
 
   module Json
-    SHOW = {only: [:id, :name, :lastname, :email, :phone, :birth, :sex, :avatar_file_name, :avatar_content_type], methods: [:access_token, :avatar_url]}
+    SHOW = {only: [:id, :name, :lastname, :email, :phone, :birth, :sex, :avatar_file_name, :avatar_content_type, :available_classes], methods: [:access_token, :avatar_url]}
   end
 
   enum sex: [:female, :male]

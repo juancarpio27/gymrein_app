@@ -14,7 +14,7 @@ class Reservation < ApplicationRecord
     SHOW = {
         include: {
             class_date: {
-                methods: [:logo_url, :event, :location]
+                methods: [:logo_url, :event, :location, :avatar_url]
             }
         }
     }
@@ -22,7 +22,7 @@ class Reservation < ApplicationRecord
     LIST = {
         include: {
             class_date: {
-                methods: [:logo_url, :event, :location]
+                methods: [:logo_url, :event, :location, :avatar_url]
             }
         }
     }
@@ -35,6 +35,7 @@ class Reservation < ApplicationRecord
   def class_date_logo
     self.class_date.event.logo_url
   end
+
 
   def check_in
     self.assisted = true

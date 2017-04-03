@@ -28,7 +28,7 @@ class ClassDate < ApplicationRecord
 
             },
             instructor: {
-
+                methods: [:avatar_url]
             }
         }
     }
@@ -42,7 +42,7 @@ class ClassDate < ApplicationRecord
 
             },
             instructor: {
-
+                methods: [:avatar_url]
             }
         }
     }
@@ -62,6 +62,10 @@ class ClassDate < ApplicationRecord
 
   def logo_url
     self.event.logo_url
+  end
+
+  def avatar_url
+    self.instructor.avatar_url
   end
 
   def new_class
