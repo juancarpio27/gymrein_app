@@ -6,7 +6,9 @@ class Instructor < ApplicationRecord
                                thumb: '100x100>',
                                square: '200x200#',
                                medium: '300x300>'
-                           }
+                           },
+                    default_url: 'https://gymrein.herokuapp.com/avatars/thumb/missing.png'
+
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   validates :name, presence: true
