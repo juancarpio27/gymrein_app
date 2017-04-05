@@ -10,7 +10,7 @@ class WaitingList < ApplicationRecord
     SHOW = {
         include: {
             class_date: {
-                methods: [:logo_url, :event, :location]
+                methods: [:logo_url, :event, :location,:avatar_url, :instructor]
             }
         }
     }
@@ -18,7 +18,7 @@ class WaitingList < ApplicationRecord
     LIST = {
         include: {
             class_date: {
-                methods: [:logo_url, :event, :location]
+                methods: [:logo_url, :event, :location, :avatar_url, :instructor]
             }
         }
     }
