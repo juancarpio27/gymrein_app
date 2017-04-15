@@ -57,7 +57,7 @@ class Api::V1::UsersController < Api::ApiController
 
   #GET /api/v1/users/:id
   def show
-    user = User.find(params[:id])
+    user = @api_key.user
     render json: @user.as_json(@user.class::Json::SHOW)
   end
 

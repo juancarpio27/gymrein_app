@@ -10,6 +10,21 @@
       </button>
       <a class="navbar-brand" href="#">Gymrein</a>
     </div>
+
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li>
+          <% if user_signed_in? %>
+              <%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete %>
+          <% else %>
+              <%= link_to "Iniciar sesión", new_user_session_path %>
+          <% end %>
+
+        </li>
+      </ul>
+    </div>
+
   </div>
 </nav>
 

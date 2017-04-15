@@ -17,6 +17,7 @@ class ClassDate < ApplicationRecord
   scope :future, -> {where('date > ?',Time.now - 6.hours)}
   scope :past, -> {where('date < ?',Time.now - 6.hours)}
 
+
   module Json
 
     SHOW = {
@@ -48,6 +49,17 @@ class ClassDate < ApplicationRecord
             instructor: {
                 methods: [:avatar_url]
             }
+        }
+    }
+
+    MONITOR = {
+        methods: [:logo_url, :event, :instructor, :location, :logo_url, :avatar_url],
+        include: {
+
+            reservations: {
+                methods: [:user, :user_avatar]
+            }
+
         }
     }
   end

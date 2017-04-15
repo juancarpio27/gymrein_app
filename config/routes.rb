@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'landing#welcome'
 
+  resources :reservations, only: [:index, :show]
+
   namespace :api do
     namespace :v1 do
       constraints(format: 'json') do
@@ -18,6 +20,7 @@ Rails.application.routes.draw do
         resource :sessions, only: [:destroy] do
           collection {
             post 'plain'
+            post 'admin'
           }
         end
 
@@ -31,13 +34,17 @@ Rails.application.routes.draw do
         resources :packages, only: [:index, :show]
         resources :instructors, only: [:show]
         resources :events, only: [:show]
-        resources :locations, only: [:show]
+        resources :locations, only: [:show, :index]
 
         resources :user_packages, only: [:create, :index]
         resources :class_dates, only: [:show] do
           collection {
             post 'find_by_date'
+            post 'find_by_location'
           }
+          member do
+            get 'get_reservations'
+          end
         end
 
         resources :promotions, only: [] do

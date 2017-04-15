@@ -7,4 +7,9 @@ class Api::V1::LocationsController < Api::ApiController
     render json: @location.as_json
   end
 
+  def index
+    @locations = Location.all
+    render json: @locations.as_json
+  end
+
 end

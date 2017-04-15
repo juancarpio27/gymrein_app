@@ -13,7 +13,7 @@ class Api::V1::WaitingListsController < Api::ApiController
       if @waiting_list.save
         render json:{success: true, waiting_list: @waiting_list.as_json(WaitingList::Json::SHOW)}
       else
-        render json: {errors: @waiting_list.errors.full_messages }, status: 422
+        render json: {success: false, errors: @waiting_list.errors.full_messages }, status: 422
       end
     end
   end

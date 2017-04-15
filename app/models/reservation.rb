@@ -36,6 +36,10 @@ class Reservation < ApplicationRecord
     self.class_date.event.logo_url
   end
 
+  def user_avatar
+    self.user.avatar_url
+  end
+
 
   def check_in
     self.assisted = true
@@ -44,6 +48,10 @@ class Reservation < ApplicationRecord
 
   def event
     self.class_date.event
+  end
+
+  def instructor
+    self.class_date.instructor
   end
 
   def return_class
