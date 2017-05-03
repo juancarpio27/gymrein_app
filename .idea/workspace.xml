@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2f00a7df-7fbf-4eb6-8094-97508b9e4b42" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/initializers/notifications.rb" afterPath="$PROJECT_DIR$/config/initializers/notifications.rb" />
     </list>
     <ignored path="gymrein_app.iws" />
@@ -48,7 +47,7 @@
         <entry file="file://$PROJECT_DIR$/config/initializers/notifications.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.51282054">
-              <caret line="24" column="38" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
+              <caret line="24" column="65" selection-start-line="24" selection-start-column="65" selection-end-line="24" selection-end-column="65" />
               <folding />
             </state>
           </provider>
@@ -813,7 +812,7 @@
     <entry file="file://$PROJECT_DIR$/config/initializers/notifications.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.51282054">
-          <caret line="24" column="38" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
+          <caret line="24" column="65" selection-start-line="24" selection-start-column="65" selection-end-line="24" selection-end-column="65" />
           <folding />
         </state>
       </provider>
