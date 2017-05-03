@@ -62,26 +62,6 @@ RSpec.describe Api::V1::ReservationsController, type: :controller do
   end
 
 
-  describe "check in" do
-    it "succesfully check in" do
-      post :check_in, id: @reservation_1.id
-      expect(response).to be_success
-      json = JSON.parse(response.body)
-      expect(json['success']).to eq true
-      expect(@reservation_1.reload.assisted).to eq true
-      expect(@reservation_2.reload.assisted).to eq false
-      expect(@reservation_3.reload.assisted).to eq false
-    end
-
-    it "returns already checked in" do
-      @reservation_1.check_in
-      post :check_in, id: @reservation_1.id
-      expect(response).to be_success
-      json = JSON.parse(response.body)
-      expect(json['success']).to eq "Already checked in"
-    end
-  end
-
   describe "create reservation" do
     it "successfully creates reservation" do
       classes = @api_key.user.available_classes

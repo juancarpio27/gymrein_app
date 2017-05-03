@@ -15,15 +15,23 @@ class Api::V1::ReservationsController < Api::ApiController
     render json: @reservations.as_json(Reservation::Json::LIST)
   end
 
-  #POST /api/v1/reservations/:id/check_in
+  #POST /api/v1/reservations/check_in
   def check_in
-    @reservation = @api_key.user.reservations.find(params[:id])
-    if @reservation.assisted
-      render json: {success: 'Already checked in'}
+    api_key = ApiKey.find_by_access_token(params[:code])
+    if api_key
+      @reservation = api_key.user.reservations.find_by_class_date_id(params[:class_date_id])
+      if @reservation and @reservation.assisted
+        render json: {success: 'Already checked in'}
+      elsif @reservation.blank?
+        render json: {success: 'Error finding reservation'}
+      else
+        @reservation.check_in
+        render json: {success: true}
+      end
     else
-      @reservation.check_in
-      render json: {success: true}
+      render json: {success: 'Error finding reservation'}
     end
+
   end
 
   #POST /api/v1/reservations
@@ -39,8 +47,6 @@ class Api::V1::ReservationsController < Api::ApiController
       if @reservation.save
         @reservation.user.update_classes(-1)
         @reservation.class_date.new_class
-        puts("NUMBER OF CLASSSESS!!!!!!")
-        puts(@reservation.class_date.available)
         render json: {success: true, reservation: @reservation.as_json(Reservation::Json::SHOW)}
       else
         render json: {errors: @reservation.errors.full_messages }, status: 422
@@ -63,6 +69,12 @@ class Api::V1::ReservationsController < Api::ApiController
           @reservation.class_date.reservations.create(user: waiting.user)
           waiting.user.update_classes(-1)
           #TODO send notification to user
+
+          session = waiting.user.sessions.active.last
+          if session
+            Notification.send_notification(session)
+          end
+
           waiting.destroy
         else
           @reservation.class_date.recover_class

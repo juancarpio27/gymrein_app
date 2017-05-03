@@ -9,3 +9,8 @@ elsif Rails.env.production?
   APN = Houston::Client.production
   APN.certificate = ENV['IOS_CERTIFICATE_PATH']
 end
+
+GCM.host = 'https://android.googleapis.com/gcm/send'
+GCM.format = :json
+#TODO include android API KEY
+#GCM.key = 'AIzaSyCnVXdbRIuOUmpHLhsIZ4i5COIWw9-IepE'
