@@ -4,8 +4,8 @@ require 'houston'
 # conveniently use `Houston::Client.development` or `Houston::Client.production`. APN = Houston::Client.development
 if Rails.env.development?
   APN = Houston::Client.development
-  APN.certificate = File.read(Rails.root.join('config','MyGymCK.pem'))
+  APN.certificate = File.read(Rails.root.join('config','MyGymCKUnEn.pem'))
 elsif Rails.env.production?
   APN = Houston::Client.production
-  APN.certificate = File.read(Rails.root.join('config','MyGymCK.pem'))
+  APN.certificate = ENV['IOS_CERTIFICATE_PATH']
 end
