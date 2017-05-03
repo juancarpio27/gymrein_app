@@ -4,7 +4,7 @@ class Api::V1::SessionsController < Api::ApiController
   def plain
     user = User.find_by(email: params[:email])
     if user && user.valid_password?(params[:password])
-      session = user.sessions.build(platform: params[:platform])
+      session = user.sessions.build(platform: params[:platform], device_id: params[:device_id])
       session.create_api_key(user: user)
       render json: {success: true, user: user.as_json(user.class::Json::SHOW) }
     else

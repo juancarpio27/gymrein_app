@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170415161352) do
+ActiveRecord::Schema.define(version: 20170503172713) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -112,12 +112,13 @@ ActiveRecord::Schema.define(version: 20170415161352) do
   end
 
   create_table "sessions", force: :cascade do |t|
-    t.integer  "platform",   limit: 1, null: false
+    t.integer  "platform",   limit: 1,              null: false
     t.datetime "deleted_at"
-    t.integer  "user_id",              null: false
+    t.integer  "user_id",                           null: false
     t.integer  "api_key_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.string   "device_id",            default: ""
     t.index ["api_key_id"], name: "index_sessions_on_api_key_id"
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end

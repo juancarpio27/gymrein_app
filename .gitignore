@@ -62,4 +62,4 @@ bower.json
 # Ignore Byebug command history file.
 .byebug_history
 
-./config/MyGymCK.pem
+config/MyGymCKUnEn.pem

@@ -17,7 +17,7 @@ class Api::V1::UsersController < Api::ApiController
     end
 
     if @user.save
-      session = @user.sessions.build(platform: params[:platform])
+      session = @user.sessions.build(platform: params[:platform], device_id: params[:device_id])
       session.create_api_key(user: @user)
       render json: @user.as_json(@user.class::Json::SHOW)
     else
