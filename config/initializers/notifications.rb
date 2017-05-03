@@ -22,5 +22,5 @@ end
 APNS.port = 2195
 # this is also the default. Shouldn't ever have to set this, but just in case Apple goes crazy, you can.
 
-APNS.pem = File.read(Rails.root.join('config','MyGymCKUnEn.pem'))
+APNS.pem = ENV['IOS_CERTIFICATE_PATH']
 APNS.pass = 'LX_MyGym'
