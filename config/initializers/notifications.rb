@@ -4,8 +4,8 @@ require 'houston'
 # conveniently use `Houston::Client.development` or `Houston::Client.production`. APN = Houston::Client.development
 if Rails.env.development?
   APN = Houston::Client.development
-  APN.certificate = ENV['IOS_CERTIFICATE_PATH']
+  APN.certificate = "#{RAILS_ROOT}/config/MyGymCK.pem"
 elsif Rails.env.production?
   APN = Houston::Client.production
-  APN.certificate = ENV['IOS_CERTIFICATE_PATH']
+  APN.certificate = "#{RAILS_ROOT}/config/MyGymCK.pem"
 end
