@@ -18,7 +18,7 @@ class Notification
     connection = Houston::Connection.new(Houston::APPLE_DEVELOPMENT_GATEWAY_URI, certificate, passphrase)
     connection.open
     notification = Houston::Notification.new(device: session.device_id)
-    notification.alert = 'Se desocupo un puesto en la clase ' + class_date.event.name + '. Tu clase empieza a las ' + class_date.datestrftime("%H:%M %m/%d/%y")
+    notification.alert = 'Se desocupo un puesto en la clase ' + class_date.event.name + '. Tu clase empieza a las ' + class_date.date.strftime("%H:%M %m/%d/%y")
     connection.write(notification.message)
     connection.close
   end
