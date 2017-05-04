@@ -72,7 +72,7 @@ class Api::V1::ReservationsController < Api::ApiController
 
           session = waiting.user.sessions.active.last
           if session
-            Notification.send_notification(session)
+            Notification.send_notification(session,waiting.class_date)
           end
 
           waiting.destroy
