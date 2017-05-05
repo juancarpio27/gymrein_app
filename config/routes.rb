@@ -34,7 +34,11 @@ Rails.application.routes.draw do
         resources :packages, only: [:index, :show]
         resources :instructors, only: [:show]
         resources :events, only: [:show]
-        resources :locations, only: [:show, :index]
+        resources :locations, only: [:show, :index] do
+          member do
+            get 'find_classes'
+          end
+        end
 
         resources :user_packages, only: [:create, :index]
         resources :class_dates, only: [:show] do
