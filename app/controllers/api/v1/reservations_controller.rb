@@ -1,6 +1,6 @@
 class Api::V1::ReservationsController < Api::ApiController
 
-  before_action :assert_user
+  before_action :assert_user, only: [:find_by_date, :future, :create, :destroy]
 
   #POST api/v1/reservations/find_by_date
   def find_by_date
