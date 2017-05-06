@@ -32,6 +32,7 @@ class Api::V1::UsersController < Api::ApiController
         @user.avatar = params[:avatar]
         @user.save!
       else
+        puts("I entered no android case")
         base = StringIO.new(Base64.decode64(params[:avatar]))
         file = Paperclip.io_adapters.for(base)
         file.original_filename = "name_image"
