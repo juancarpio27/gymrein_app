@@ -27,6 +27,17 @@ class Api::V1::UsersController < Api::ApiController
 
   #PATCH /api/v1/users
   def update
+    if params[:avatar]
+      if @api_key.user.sessions.active.ios?
+        @user.avatar = params[:avatar]
+      else
+        base = StringIO.new(Base64.decode64(params[:avatar]))
+        file = Paperclip.io_adapters.for(base)
+        file.original_filename = "name_image"
+        @user.avatar = file
+      end
+    end
+
     if @api_key.user.update(user_params)
       render json: @user.as_json(@user.class::Json::SHOW)
     else
