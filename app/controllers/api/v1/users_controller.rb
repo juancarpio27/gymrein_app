@@ -30,11 +30,13 @@ class Api::V1::UsersController < Api::ApiController
     if params[:avatar]
       if @api_key.user.sessions.active.last.ios?
         @user.avatar = params[:avatar]
+        @user.save!
       else
         base = StringIO.new(Base64.decode64(params[:avatar]))
         file = Paperclip.io_adapters.for(base)
         file.original_filename = "name_image"
         @user.avatar = file
+        @user.save!
       end
     end
 
