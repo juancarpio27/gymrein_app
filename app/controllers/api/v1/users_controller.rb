@@ -40,7 +40,9 @@ class Api::V1::UsersController < Api::ApiController
       end
     end
 
-    if @api_key.user.update(user_params)
+    if params[:user] and @api_key.user.update(user_params)
+      render json: @user.as_json(@user.class::Json::SHOW)
+    elsif params[:user].blank?
       render json: @user.as_json(@user.class::Json::SHOW)
     else
       render json: {errors: @user.errors.full_messages }, status: 422
