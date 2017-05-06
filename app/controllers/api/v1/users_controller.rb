@@ -28,7 +28,7 @@ class Api::V1::UsersController < Api::ApiController
   #PATCH /api/v1/users
   def update
     if params[:avatar]
-      if @api_key.user.sessions.active.ios?
+      if @api_key.user.sessions.active.last.ios?
         @user.avatar = params[:avatar]
       else
         base = StringIO.new(Base64.decode64(params[:avatar]))
