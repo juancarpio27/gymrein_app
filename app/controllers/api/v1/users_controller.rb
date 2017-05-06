@@ -29,6 +29,7 @@ class Api::V1::UsersController < Api::ApiController
   def update
     if params[:avatar]
       if @api_key.user.sessions.active.last.ios?
+        puts("I entenred in de ios case")
         @user.avatar = params[:avatar]
         @user.save!
       else
