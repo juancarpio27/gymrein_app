@@ -1,7 +1,5 @@
 class Api::V1::ClassDatesController < Api::ApiController
 
-  before_action :assert_user
-
   #GET api/v1/class_dates/:id
   def show
     @class = ClassDate.find(params[:id])
