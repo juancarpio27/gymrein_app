@@ -21,15 +21,15 @@ class Api::V1::ReservationsController < Api::ApiController
     if api_key
       @reservation = api_key.user.reservations.find_by_class_date_id(params[:class_date_id])
       if @reservation and @reservation.assisted
-        render json: {success: 'Already checked in'}
+        render json: {success: false, error: 'Already checked in'}
       elsif @reservation.blank?
-        render json: {success: 'Error finding reservation'}
+        render json: {success: false, error:'Error finding reservation'}
       else
         @reservation.check_in
-        render json: {success: true}
+        render json: {success: true, reservation: @reservation.as_json}
       end
     else
-      render json: {success: 'Error finding reservation'}
+      render json: {success: false, error:'Error finding reservation'}
     end
 
   end
