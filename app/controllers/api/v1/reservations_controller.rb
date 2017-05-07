@@ -57,7 +57,7 @@ class Api::V1::ReservationsController < Api::ApiController
   #DELETE /api/vi/reservations/:id
   def destroy
     @reservation = @api_key.user.reservations.find(params[:id])
-    minutes = ((@reservation.class_date.date - Time.now.in_time_zone('Mexico City'))/60).to_i
+    minutes = ((@reservation.class_date.date - (Time.now - 5.hours))/60).to_i
     if minutes < 0
       render json: {success: false, error: 'Class is already done'}
     elsif minutes >= 0 and minutes < 90
@@ -68,8 +68,6 @@ class Api::V1::ReservationsController < Api::ApiController
           waiting = @reservation.class_date.waiting_lists.order(:created_at).first
           @reservation.class_date.reservations.create(user: waiting.user)
           waiting.user.update_classes(-1)
-          #TODO send notification to user
-
           session = waiting.user.sessions.active.last
           if session
             Notification.send_notification(session,waiting.class_date)
