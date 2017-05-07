@@ -42,7 +42,7 @@ class Api::V1::WaitingListsController < Api::ApiController
 
   #GET api/v1/wiaiting_lists/future
   def future
-    @waiting_list = @api_key.user.waiting_lists.joins(:class_date).where('class_dates.date > ?',Time.now.in_time_zone('Mexico City'))
+    @waiting_list = @api_key.user.waiting_lists.joins(:class_date).where('class_dates.date > ?',Time.now - 5.hours)
     render json: @waiting_list.as_json(WaitingList::Json::LIST)
   end
 
