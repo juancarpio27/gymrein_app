@@ -9,7 +9,7 @@ end
 gem 'rails', '~> 5.0.1'
 #Databases
 gem 'sqlite3', group: :development
-gem 'pg', group: :production # Added postgres and made it production only.
+gem 'pg' # Added postgres and made it production only.
 gem 'rails_12factor'
 #Server
 gem 'puma', '~> 3.0'
