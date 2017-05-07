@@ -114,7 +114,7 @@ RSpec.describe Api::V1::ReservationsController, type: :controller do
   describe "destroy reservation" do
 
     it "dont allow to cancel less than 90 minutes before class" do
-      boxing = FactoryGirl.create(:class_date, date: Time.now.in_time_zone('Mexico City') + 50.minutes)
+      boxing = FactoryGirl.create(:class_date, date: Time.now - 5.hours + 50.minutes)
       reservation = FactoryGirl.create(:reservation, user: @api_key.user, class_date: boxing)
       delete :destroy, id: reservation.id
       expect(response).to be_success
