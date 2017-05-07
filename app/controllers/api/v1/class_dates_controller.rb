@@ -16,7 +16,7 @@ class Api::V1::ClassDatesController < Api::ApiController
   #POST api/v1/class_dates/find_by_location
   def find_by_location
     date = Date.today
-    @classes = ClassDate.where(location_id: params[:location_id]).where(date: date.midnight..date.end_of_day).order('date'
+    @classes = ClassDate.where(location_id: params[:location_id]).where(date: date.midnight..date.end_of_day).order('date')
     render json: @classes.as_json(ClassDate::Json::LIST)
   end
 
