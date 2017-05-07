@@ -9,7 +9,7 @@ class Api::V1::ClassDatesController < Api::ApiController
   #POST api/v1/class_dates/find_by_date
   def find_by_date
     date = Date.parse(params[:date])
-    @classes = ClassDate.where(date: date.midnight..date.end_of_day)
+    @classes = ClassDate.where(date: date.midnight..date.end_of_day).order('date')
     render json: @classes.as_json(ClassDate::Json::LIST)
   end
 
