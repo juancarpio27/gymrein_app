@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2f00a7df-7fbf-4eb6-8094-97508b9e4b42" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/api/v1/reservations_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/api/v1/reservations_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/controllers/api/v1/reservations_controller_spec.rb" afterPath="$PROJECT_DIR$/spec/controllers/api/v1/reservations_controller_spec.rb" />
     </list>
     <ignored path="gymrein_app.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,7 +36,7 @@
       <file leaf-file-name="reservations_controller.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/api/v1/reservations_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.42207792">
+            <state vertical-scroll-proportion="0.38961038">
               <caret line="13" column="113" selection-start-line="13" selection-start-column="113" selection-end-line="13" selection-end-column="113" />
               <folding />
             </state>
@@ -945,7 +944,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/api/v1/reservations_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42207792">
+        <state vertical-scroll-proportion="0.38961038">
           <caret line="13" column="113" selection-start-line="13" selection-start-column="113" selection-end-line="13" selection-end-column="113" />
           <folding />
         </state>

@@ -11,7 +11,7 @@ class Api::V1::ReservationsController < Api::ApiController
 
   #GET api/v1/reservations/future
   def future
-    @reservations = @api_key.user.reservations.joins(:class_date).where('class_dates.date > ?',Time.now - 5.hours))
+    @reservations = @api_key.user.reservations.joins(:class_date).where('class_dates.date > ?',Time.now - 5.hours)
     render json: @reservations.as_json(Reservation::Json::LIST)
   end
 
