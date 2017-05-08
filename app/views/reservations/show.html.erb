@@ -72,21 +72,27 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <div class="well">
-        <div class="row">
-          <div class="col-md-3">
-            <%= image_tag @reservation.class_date.instructor.avatar.url(:thumb), size: "50" %>
+      <% if @reservation.class_date.instructor %>
+          <div class="well">
+            <div class="row">
+              <div class="col-md-3">
+                <%= image_tag @reservation.class_date.instructor.avatar.url(:thumb), size: "50" %>
+              </div>
+              <div class="col-md-9">
+                <h4><%= @reservation.class_date.instructor.name %></h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <p><%= @reservation.class_date.instructor.biography %></p>
+              </div>
+            </div>
           </div>
-          <div class="col-md-9">
-            <h4><%= @reservation.class_date.instructor.name %></h4>
+      <% else %>
+          <div class="well">
+            <h3>Sin instructor asignado</h3>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <p><%= @reservation.class_date.instructor.biography %></p>
-          </div>
-        </div>
-      </div>
+      <% end %>
     </div>
     <div class="col-md-6">
       <div class="well">
