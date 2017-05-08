@@ -24,7 +24,7 @@ class Notification
   end
 
   def self.send_android_notification(session,class_date)
-    destination = [session.device_id]
+    destination = session.device_id
     message = 'Se desocupó un puesto en la clase de' + class_date.event.name + '. Tu clase empieza a las ' + class_date.date.strftime("%H:%M %m/%d/%y")
     data = {message: message}
     GCM.send_notification( destination, data )

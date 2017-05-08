@@ -25,12 +25,12 @@ class User < ApplicationRecord
   validates :birth, presence: true
   validates :sex, presence: true
 
-  has_many :api_keys
-  has_many :sessions
-  has_many :cards
-  has_many :user_packages
-  has_many :reservations
-  has_many :waiting_lists
+  has_many :api_keys, dependent: :destroy
+  has_many :sessions, dependent: :destroy
+  has_many :cards, dependent: :destroy
+  has_many :user_packages, dependent: :destroy
+  has_many :reservations, dependent: :destroy
+  has_many :waiting_lists, dependent: :destroy
 
   has_many :class_dates, through: :reservations
   has_many :class_waiting, through: :waiting_lists, source: :class_date
