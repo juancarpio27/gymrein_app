@@ -4,7 +4,7 @@ class Api::V1::PackagesController < Api::ApiController
 
   #GET /api/v1/packages
   def index
-    @packages = Package.all
+    @packages = Package.active
     render json: @packages.as_json
   end
 

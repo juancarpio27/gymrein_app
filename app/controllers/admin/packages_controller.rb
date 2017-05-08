@@ -3,7 +3,7 @@ class Admin::PackagesController < AdminController
   before_action :authenticate
 
   def index
-    @packages = Package.find_by_fullname(params[:search]).paginate(:page => params[:page])
+    @packages = Package.find_by_fullname(params[:search]).active.paginate(:page => params[:page])
   end
 
   def new
@@ -38,7 +38,7 @@ class Admin::PackagesController < AdminController
 
   def destroy
     @package = Package.find(params[:id])
-    if @package.destroy
+    if @package.update(deteled_at: Time.now)
       redirect_to admin_packages_path
     else
       redirect_to admin_packages_path
