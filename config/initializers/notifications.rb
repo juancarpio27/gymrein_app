@@ -13,4 +13,4 @@ end
 GCM.host = 'https://android.googleapis.com/gcm/send'
 GCM.format = :json
 #TODO include android API KEY
-#GCM.key = 'AIzaSyCnVXdbRIuOUmpHLhsIZ4i5COIWw9-IepE'
+GCM.key = 'AIzaSyAlCB41qR9PmUs-3N8OMdJt6npg9LHgVW4'
