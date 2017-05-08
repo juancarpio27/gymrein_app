@@ -14,7 +14,7 @@ class Instructor < ApplicationRecord
   validates :name, presence: true
   validates :lastname, presence: true
 
-  has_many :class_dates
+  has_many :class_dates, dependent: :nullify
 
   scope :find_by_fullname,->(name){ where("LOWER(name || ' ' || lastname) LIKE ?", "%#{name}%")}
 

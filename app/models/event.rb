@@ -8,7 +8,7 @@ class Event < ApplicationRecord
                            }
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
 
-  has_many :class_dates
+  has_many :class_dates, dependent: :destroy
 
   scope :find_by_fullname,->(name){ where("LOWER(name) LIKE ?", "%#{name}%")}
 
