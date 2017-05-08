@@ -10,7 +10,7 @@ class Promotion < ApplicationRecord
   scope :find_by_fullname,->(code){ where("code LIKE ?", "%#{code}%")}
 
 
-  has_many :user_packages
+  has_many :user_packages, dependent: :nullify
 
   self.per_page = 20
 
