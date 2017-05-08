@@ -38,7 +38,7 @@ class Admin::PackagesController < AdminController
 
   def destroy
     @package = Package.find(params[:id])
-    if @package.update(deteled_at: Time.now)
+    if @package.update(deleted_at: Time.now)
       redirect_to admin_packages_path
     else
       redirect_to admin_packages_path
