@@ -33,7 +33,11 @@
     </tr>
     <tr>
       <td>Instructor</td>
-      <td><%= @class_date.instructor.full_name %></td>
+      <% if @class_date.instructor %>
+        <td><%= @class_date.instructor.full_name %></td>
+      <% else %>
+        <td>Sin instructor asignado</td>
+      <%end %>
     </tr>
     <% if @class_date.past_class %>
         <tr>
